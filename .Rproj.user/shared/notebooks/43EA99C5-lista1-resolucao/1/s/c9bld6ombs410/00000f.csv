@@ -1,0 +1,6 @@
+"0","#| label: separacao-dados"
+"0","#| depends: geracao-dados"
+"0",""
+"0","dados_train <- dados[1:80000,]"
+"0","dados_valid <- dados[80001:90000,]"
+"0","dados_test <- dados[90001:nrow(dados),]"

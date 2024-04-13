@@ -1,0 +1,21 @@
+---
+title: "Lista 1: Ajustando uma RNA 'no braço'" 
+author: César A. Galvão - 190011572
+lang: pt
+format: 
+  pdf:
+    documentclass: article
+    fig-pos: H
+    cite-method: citeproc
+    papersize: a4paper
+    keep-tex: true
+    df-print: paged
+    toc: true
+    toc-depth: 2
+    mathspec: true
+---
+
+# Questão 1
+
+Crie uma função computacional para calcular o valor previso da variável resposta $\hat{y} = f(x; \theta)$ em função de $x$ e $\theta$. Use a função para calcular $\hat{y}$ para $\theta = (0.1, \dots , 0.1)$ e $x = (1, 1)$.
+
