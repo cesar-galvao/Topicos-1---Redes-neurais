@@ -95,15 +95,15 @@ phi <- function(x) {1/(1 + exp(-x))}
 ffwd <- function(x, theta) {
   
   if(any(dim(theta[[1]]) != c(2, 2))){
-    stop("O primeiro elemento de theta deve ser uma matriz de pesos 2x2 para a aplicação nos dados")
+    stop("Feed Forward: O primeiro elemento de theta deve ser uma matriz de pesos 2x2 para a aplicação nos dados")
   } else if(length(theta[[2]]) != 2){
-    stop("O segundo elemento de theta deve ser um vetor viés de tamanho 2 para somar aos dados")
+    stop("Feed Forward: O segundo elemento de theta deve ser um vetor viés de tamanho 2 para somar aos dados")
   } else if(any(dim(theta[[3]]) != c(2, 1))){
-    stop("O terceiro elemento de theta deve ser uma matriz de pesos 2x1 para aplicação na única camada h")
+    stop("Feed Forward: O terceiro elemento de theta deve ser uma matriz de pesos 2x1 para aplicação na única camada h")
   } else if(length(theta[[4]]) != 1){
-    stop("O quarto elemento de theta deve ser um vetor viés de tamanho 1 para soma na única camada h")
+    stop("Feed Forward: O quarto elemento de theta deve ser um vetor viés de tamanho 1 para soma na única camada h")
   } else if(!is.vector(x) & length(x) != 2){
-    stop("O x deve ser um vetor de tamanho 2")
+    stop("Feed Forward: x deve ser um vetor de tamanho 2")
   }
   
   x <- as.vector(x)
@@ -113,14 +113,14 @@ ffwd <- function(x, theta) {
   W2 <- theta[[3]]
   b2 <- theta[[4]]
   
-  a1 <- (t(W1)%*%x)+b1
-  h <- phi(a1)
+  a <- (t(W1)%*%x)+b1
+  h <- phi(a)
   yhat <- (t(W2)%*%h)+b2
   
   return( # separacao dos elementos de saída para usar no backpropagation
     list(yhat = as.double(yhat),
          hidden = h,
-         pre_activation = a1)
+         pre_activation = a)
   )
 }
 ```
@@ -137,10 +137,10 @@ Agora vamos calcular $\hat{y}$ para $\boldsymbol{\theta} = (0.1, \dots , 0.1)$ e
 x <- c(1,1)
 
 theta <- list(
-  matrix(c(0.1), nrow = 2, ncol = 2), #w1
-  c(0.1, 0.1), #b1
-  matrix(c(0.1), nrow = 2, ncol = 1), #w2
-  c(0.1) #b2
+  M1 = matrix(c(0.1), nrow = 2, ncol = 2), 
+  b12 = c(0.1, 0.1), 
+  M2 = matrix(c(0.1), nrow = 2, ncol = 1), 
+  b3 = c(0.1) 
 )
 
 ffwd(x, theta)
@@ -193,26 +193,38 @@ onde $m$ é o número de observações.
 J.Loss <- function(dados, theta, target){
   
   if(!is.data.frame(dados) | !is_tibble(dados)){
-    stop("Dados deve ser uma dataframe ou tibble.")
+    stop("Loss: Dados deve ser uma dataframe ou tibble.")
   } else if (dim(dados)[2] != 2){
-    stop("Matriz de dados deve ter 2 colunas.")
+    stop("Loss: Matriz de dados deve ter 2 colunas.")
   } else if (!is.list(theta)){
-    stop("Theta deve ser uma lista com pesos e viéses.")
+    stop("Loss: Theta deve ser uma lista com pesos e viéses.")
   } else if (!is.numeric(target)){
-    stop("Target deve ser um vetor numérico.")
+    stop("Loss: Target deve ser um vetor numérico.")
   }
   
 # aloca memoria para o tamanho dos dados
   yhat <- double(nrow(dados))
+  
+# aloca memoria para os valores pre ativação dos 'a'  
+  a <- matrix(nrow = nrow(dados), ncol = 2, dimnames = list(NULL, c("a1", "a2")))
+
+  
 # transpoe os dados para termos acesso aos vetores de x que serao passados para a primeira camada da rede
   tdados <- t(as.matrix(dados))
   
   for(i in 1:ncol(tdados)){
     yhat[i] <- ffwd(tdados[,i], theta)$yhat
+    a[i,] <- ffwd(tdados[,i], theta)$pre_activation
   }
   
-  return(mean((target - yhat)^2)) #média ja entrega soma/m
-  
+  return(
+    list(
+      loss = mean((target - yhat)^2), #média ja entrega soma/m
+      yhat = yhat,
+      pre_activation = a,
+      hidden = matrix(c(phi(a[,1]), phi(a[,2])), ncol = 2)
+    )
+  )
 }
 ```
 
@@ -252,12 +264,12 @@ y_test <- dados_test %>%
   pull(y)
 
 # theta já foi gerado e será reaproveitado
-J.Loss(x_test, theta, y_test)
+J.Loss(x_test, theta, y_test)$loss
 ```
   
 \  
   
-Obtemos um custo de `r J.Loss(x_test, theta, y_test)`.
+Obtemos um custo de `r J.Loss(x_test, theta, y_test)$loss`.
 
 
 ## Item c
@@ -356,7 +368,7 @@ Finalmente, substituimos os as componentes na equação (\ref{101}) e explicitam
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i) \, w_5 \frac{e^{a_{1i}}}{(1+e^{a_{1i}})^2} \\ \\ 
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i) \, w_6 \frac{e^{a_{2i}}}{(1+e^{a_{2i}})^2} \\ \\ 
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i)(-1)
-\end{pmatrix}
+\end{pmatrix} \label{102}
 \end{align}  
 ```
 
@@ -368,44 +380,262 @@ Crie uma função computacional que receba como entrada o vetor $\theta$, uma ma
 
 ------------------------------------------------------------------------
 
+Primeiramente, implementamos o gradiente encontrado em (\ref{102}):
 
-na função, para responder de D a F:
+```{r}
+#| label: gradiente
 
-function(theta, dados, target, optimize = TRUE, learning_rate = NULL, epochs = NULL, plot = FALSE)
+gradiente <- function(dados, theta, target){
+  
+  if(!is.list(theta)){
+    stop("Gradiente: Theta deve ser uma lista com pesos e viéses.")
+  } else if(!is.data.frame(dados) | !is_tibble(dados)){
+    stop("Gradiente: Dados deve ser uma dataframe ou tibble.")
+  } else if(!is.numeric(target)){
+    stop("Gradiente: Target deve ser um vetor numérico.")
+  }
 
-- optimize: se true, otimiza. Se false, retorna o gradiente. padrao é true.
-- learning rate
-- iteracoes: numero de iteracoes
-- plot: se true, gera um elemento da lista de saída com o custo em cada iteracao. padrao é false.
+  loss_results <- J.Loss(dados, theta, target)
+  
+  # vetor de yhat
+  yhat <- loss_results$yhat
+  
+  # pre_activation da J.Loss retorna o vetor de 'a'
+  a <- loss_results$pre_activation
+  #transformacao em nos neuronios pre-ativacao
+  a<- exp(a)/(1+ exp(a))^2
+  
+  # diferenca entre (target) y e yhat
+  diff <- (target-yhat)
+  
+  # dados como uma matriz
+  dados <- as.matrix(dados)
+  
+  g_w1 <- 2*mean(diff*theta[[3]][1]*dados[,1]*a[,1]) #x1, a1, w5
+  g_w2 <- 2*mean(diff*theta[[3]][2]*dados[,1]*a[,2]) #x1, a2, w6
+  g_w3 <- 2*mean(diff*theta[[3]][1]*dados[,2]*a[,1]) #x2, a1, w5
+  g_w4 <- 2*mean(diff*theta[[3]][2]*dados[,2]*a[,2]) #x2, a2, w6
+  g_w5 <- 2*mean(diff*(-loss_results$hidden[,1])) #h1
+  g_w6 <- 2*mean(diff*(-loss_results$hidden[,2])) #h2
+  g_b1 <- 2*mean(diff*theta[[3]][1]*a[,1]) #a1, w5
+  g_b2 <- 2*mean(diff*theta[[3]][2]*a[,2]) #a2, w6
+  g_b3 <- 2*mean(diff*(-1))
+  
+  grad <- c(g_w1, g_w2, g_w3, g_w4, g_w5, g_w6, g_b1, g_b2, g_b3)
+  names(grad) <- c("w1", "w2", "w3", "w4", "w5", "w6", "b1", "b2", "b3")
+  
+
+  
+  return(  
+    list(grad = grad,
+       loss_results = list(
+         loss = loss_results$loss,
+         yhat = loss_results$yhat,
+         hidden = loss_results$hidden,
+         pre_activation = loss_results$pre_activation
+        )
+       )
+    )
+}
+```
+
+\ 
+
+É apresentado a seguir o resultado da função aplicada sobre o banco de treinamento, quando $\theta = (0.1, \dots , 0.1)$:
+
+```{r}
+#| label: gradiente-aplicacao
+#| depends: gradiente, separacao-dados
+
+gradiente(dados_train[,c(1,2)], theta, dados_train$y)$grad %>%
+  as_tibble() %>%
+  summarise(Componente = c("w1", "w2", "w3", "w4", "w5", "w6", "b1", "b2", "b3"),
+         Derivada = .$value) %>%
+  knitr::kable()
+
+```
+
+
+## Item e
+
+Aplique o método do gradiente para encontrar os parâmetros que minimizam a função de custo no **banco de validação**. Inicie o algoritmo no ponto $\theta = (0, \dots , 0)$, use taxa de aprendizagem $\epsilon = 0.1$ e rode o algoritmo por 100 iterações. Reporte o menor custo obtido e indique em qual iteração ele foi observado. Apresente também o vetor de pesos estimado e comente o resultado.
+
+------------------------------------------------------------------------
+
+Para a *backpropagation* foi implementada a função a seguir que funciona em um de dois modos: por número de iterações ou por critério de aceitação. Neste caso, deve ser fornecido um limiar do valor da função de custo para que o algoritmo pare.
+
 
 ```{r}
 #| label: back-propagation
 
-backpropagation <- function(theta, dados, target, optimize = TRUE, learning_rate = NULL, epochs = NULL, plot = FALSE){
+backpropagation <- function(dados, theta, target, learning_rate = NULL, epochs = NULL, acceptance = NULL){
   
   if(!is.list(theta)){
-    stop("Theta deve ser uma lista com pesos e viéses.")
-  } else if(!is.data.frame(dados) | !is.tibble(dados)){
-    stop("Dados deve ser uma dataframe ou tibble.")
+    stop("Back propagation: Theta deve ser uma lista com pesos e viéses.")
+  } else if(!is.data.frame(dados) | !is_tibble(dados)){
+    stop("Back propagation: Dados deve ser uma dataframe ou tibble.")
   } else if(!is.numeric(target)){
-    stop("Target deve ser um vetor numérico.")
-  } else if(!is.logical(optimize)){
-    stop("Optimize deve ser um valor lógico.")
-  } else if(!is.numeric(learning_rate) & !is.null(learning_rate)){
-    stop("Learning rate deve ser um número real.")
-  } else if(!is.numeric(epochs) & !is.null(epochs)){
-    stop("Epochs deve ser um número inteiro.")
-  } else if(!is.logical(plot)){
-    stop("Plot deve ser um valor lógico.")
+    stop("Back propagation: Target deve ser um vetor numérico.")
+  } else if ((!is.null(epochs) & !is.null(acceptance)) | (is.null(epochs) & is.null(acceptance))){
+    stop("Back propagation: Escolha se devem ser realizadas iterações programadas ou se o critério de parada será definido por um limite.")
+  } else if (!is.numeric(learning_rate) & !is.null(learning_rate) & learning_rate > 0){
+    stop("Back propagation: Learning rate deve ser um número real positivo.")
+  } else if (!is.integer(epochs) & !is.null(epochs)){
+    stop("Back propagation: Epochs deve ser um número inteiro positivo.")
   }
   
-# y é o target
-# yhat é o resultado da ffwd$yhat
-# todos ws vem da theta
-# x vem dos dados
-# as vem da ffwd$pre_activation
-# h vem da ffwd$hidden
-  
+
+# Se for definido por learning rate
+ if(!is.null(learning_rate)){
+  loss_history <- numeric(epochs)
+# initiate loop 
+  for(i in 1:epochs){
+    #1 forward computation and gradient
+    grad_results <- gradiente(dados, theta, target)
+    # disponivel: 
+    ## gradiente.
+    ## loss results: yhat, hidden, pre_activation
+    loss_history[i] <- grad_results$loss_results$loss
+    #2 back propagate the gradient
+    # novos pesos = theta - learning rate * gradiente
+   
+    gradient_list <- list(
+      W1_update = matrix(grad_results$grad[1:4], nrow = 2, byrow = TRUE),
+      b12_update = grad_results$grad[7:8],
+      W2_update = matrix(grad_results$grad[5:6], nrow = 2, byrow = TRUE),
+      b3_update = grad_results$grad[9]
+    )
+    
+    theta <- list( #usaremos o mesmo nome para atualizar no loop
+      W1 = theta[[1]] - learning_rate*gradient_list$W1_update,
+      b12 = theta[[2]] - learning_rate*gradient_list$b12_update,
+      W2 = theta[[3]] - learning_rate*gradient_list$W2_update,
+      b3 = theta[[4]] - learning_rate*gradient_list$b3_update
+    )
+  } 
+  # outputs: pesos finais e histórico de loss
+  return(list(
+    theta = theta,
+    loss_history = loss_history
+    )
+  )
+ } else if (!is.null(acceptance)){
+   # Se for definido por acceptance
+   
+   i <- 1
+   loss_history <- Inf
+   
+   while(loss_history[i] > acceptance){
+     #1 forward computation and gradient
+    grad_results <- gradiente(dados, theta, target)
+    # disponivel: 
+    ## gradiente.
+    ## loss results: yhat, hidden, pre_activation
+    loss_history[i] <- grad_results$loss_results$loss
+    #2 back propagate the gradient
+    # novos pesos = theta - learning rate * gradiente
+   
+    gradient_list <- list(
+      W1_update = matrix(grad_results$grad[1:4], nrow = 2, byrow = TRUE),
+      b12_update = grad_results$grad[7:8],
+      W2_update = matrix(grad_results$grad[5:6], nrow = 2, byrow = TRUE),
+      b3_update = grad_results$grad[9]
+    )
+    
+    theta <- list( #usaremos o mesmo nome para atualizar no loop
+      W1 = theta[[1]] - learning_rate*gradient_list$W1_update,
+      b12 = theta[[2]] - learning_rate*gradient_list$b12_update,
+      W2 = theta[[3]] - learning_rate*gradient_list$W2_update,
+      b3 = theta[[4]] - learning_rate*gradient_list$b3_update
+    )
+    i <- i+1
+   }
+   return(list(
+    theta = theta,
+    loss_history = loss_history,
+    iterations = i-1
+    )
+   )
+ }
 }
 ```
 
+\ 
+
+A seguir é apresentado o resultado da função aplicada sobre o banco de validação, quando $\theta = (0, \dots , 0)$, com taxa de aprendizagem $\epsilon = 0.1$ e 100 iterações.
+
+```{r}
+#| label: back-propagation-aplicacao
+#| depends: back-propagation, separacao-dados
+
+theta <- list(
+  W1 = matrix(rep(0, 4), nrow = 2, byrow = TRUE),
+  b12 = c(0, 0),
+  W2 = matrix(rep(0, 2), nrow = 2, byrow = TRUE),
+  b3 = 0
+)
+
+learning_rate <-  0.1
+
+epochs <- 100L
+
+y <- dados_valid$y
+x <- dados_valid[,c(1,2)]
+
+back_validacao <- backpropagation(x, theta, y, learning_rate, epochs)
+```
+
+\ 
+
+O menor custo obtido foi `r min(back_validacao$loss_history)` e foi observado na iteração `r which.min(back_validacao$loss_history)`.
+
+Um gráfico do histórico de custo é apresentado a seguir:
+
+```{r}
+#| label: fig-historico-custo
+#| fig-cap: Histórico de custo para o banco de validação.
+#| echo: false
+#| fig-width: 4.5
+#| fig-height: 2.75
+
+back_validacao$loss_history %>%
+  tibble(Iteracao = 1:length(.), Custo = .) %>%
+  ggplot(aes(x = Iteracao, y = Custo)) +
+  geom_line() +
+  labs(x = "Iteração",
+       y = "Custo")+
+  theme_bw()+
+    theme(panel.border = element_blank(), # Remove all panel borders
+        axis.line = element_line(color = "#474747"), # Add axis lines
+        axis.ticks.x = element_line(color = "#474747"), # X axis ticks
+        axis.ticks.y = element_line(color = "#474747"), # Y axis ticks
+        axis.ticks.length = unit(0.05, "cm")) # Control tick length
+```
+
+O vetor de pesos estimado foi:
+
+\begin{align*}
+W^{(1)} = \begin{pmatrix} `r back_validacao$theta$W1[1,1]` & `r back_validacao$theta$W1[1,2]` \\ `r back_validacao$theta$W1[2,1]` & `r back_validacao$theta$W1[2,2]` \end{pmatrix}, \quad 
+%
+\boldsymbol{b}^{(1)} = \begin{pmatrix} `r back_validacao$theta$b12[1]` \\ `r back_validacao$theta$b12[2]` \end{pmatrix},
+\end{align*}
+
+\begin{align*}
+W^{(2)} = \begin{pmatrix} `r back_validacao$theta$W2[1,1]` \\ `r back_validacao$theta$W2[2,1]` \end{pmatrix}, \quad 
+%
+\boldsymbol{b}^{(2)} = `r back_validacao$theta$b3`.
+\end{align*}
+
+Interessantemente, os pesos de cada variavel para a camada seguinte, assim como os viéses, são idênticos. Além disso, os pesos aplicados nos neurônios da camada escondida também são idênticos. Isso pode ser um indicativo de que ambas as variáveis explicativas possuem importância igual para a previsão da variável resposta. Ao mesmo tempo, ambas $X_1$ e $X_2$ têm o mesmo processo gerador, então não parece ser surpreendente que os pesos sejam iguais.
+
+Finalmente, o gráfico indica que possivelmente o algoritmo estacionou em um mínimo local de valor superior ao mínimo encontrado na iteração de número `r which.min(back_validacao$loss_history)`.
+
+## Item f
+
+
+
+# Lições aprendidas
+
+É muito positivo construir funções que retornam listas com os resultados de cada etapa do algoritmo. Isso facilita a depuração e a compreensão do código. Além disso, é importante testar cada função separadamente para garantir que ela está retornando o resultado esperado.
+
+Frequentemente quando avançava um item, percebia que poderia incrementar funções anteriores que já retornavam internamente vetores que seriam usados futuramente. Dessa forma, é possível utilizar listas para fazer referencias fáceis a componentes de cada etapa e evitar repetições desnecessárias de cálculos, reduzindo o custo computacional da lista como um todo.

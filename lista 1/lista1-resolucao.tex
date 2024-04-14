@@ -274,15 +274,15 @@ ou
 \NormalTok{ffwd }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, theta) \{}
   
   \ControlFlowTok{if}\NormalTok{(}\FunctionTok{any}\NormalTok{(}\FunctionTok{dim}\NormalTok{(theta[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{!=} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"O primeiro elemento de theta deve ser uma matriz de pesos 2x2 para a aplicação nos dados"}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Feed Forward: O primeiro elemento de theta deve ser uma matriz de pesos 2x2 para a aplicação nos dados"}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(theta[[}\DecValTok{2}\NormalTok{]]) }\SpecialCharTok{!=} \DecValTok{2}\NormalTok{)\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"O segundo elemento de theta deve ser um vetor viés de tamanho 2 para somar aos dados"}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Feed Forward: O segundo elemento de theta deve ser um vetor viés de tamanho 2 para somar aos dados"}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\FunctionTok{any}\NormalTok{(}\FunctionTok{dim}\NormalTok{(theta[[}\DecValTok{3}\NormalTok{]]) }\SpecialCharTok{!=} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"O terceiro elemento de theta deve ser uma matriz de pesos 2x1 para aplicação na única camada h"}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Feed Forward: O terceiro elemento de theta deve ser uma matriz de pesos 2x1 para aplicação na única camada h"}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(theta[[}\DecValTok{4}\NormalTok{]]) }\SpecialCharTok{!=} \DecValTok{1}\NormalTok{)\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"O quarto elemento de theta deve ser um vetor viés de tamanho 1 para soma na única camada h"}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Feed Forward: O quarto elemento de theta deve ser um vetor viés de tamanho 1 para soma na única camada h"}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.vector}\NormalTok{(x) }\SpecialCharTok{\&} \FunctionTok{length}\NormalTok{(x) }\SpecialCharTok{!=} \DecValTok{2}\NormalTok{)\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"O x deve ser um vetor de tamanho 2"}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Feed Forward: x deve ser um vetor de tamanho 2"}\NormalTok{)}
 \NormalTok{  \}}
   
 \NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(x)}
@@ -292,14 +292,14 @@ ou
 \NormalTok{  W2 }\OtherTok{\textless{}{-}}\NormalTok{ theta[[}\DecValTok{3}\NormalTok{]]}
 \NormalTok{  b2 }\OtherTok{\textless{}{-}}\NormalTok{ theta[[}\DecValTok{4}\NormalTok{]]}
   
-\NormalTok{  a1 }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(W1)}\SpecialCharTok{\%*\%}\NormalTok{x)}\SpecialCharTok{+}\NormalTok{b1}
-\NormalTok{  h }\OtherTok{\textless{}{-}} \FunctionTok{phi}\NormalTok{(a1)}
+\NormalTok{  a }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(W1)}\SpecialCharTok{\%*\%}\NormalTok{x)}\SpecialCharTok{+}\NormalTok{b1}
+\NormalTok{  h }\OtherTok{\textless{}{-}} \FunctionTok{phi}\NormalTok{(a)}
 \NormalTok{  yhat }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(W2)}\SpecialCharTok{\%*\%}\NormalTok{h)}\SpecialCharTok{+}\NormalTok{b2}
   
   \FunctionTok{return}\NormalTok{( }\CommentTok{\# separacao dos elementos de saída para usar no backpropagation}
     \FunctionTok{list}\NormalTok{(}\AttributeTok{yhat =} \FunctionTok{as.double}\NormalTok{(yhat),}
          \AttributeTok{hidden =}\NormalTok{ h,}
-         \AttributeTok{pre\_activation =}\NormalTok{ a1)}
+         \AttributeTok{pre\_activation =}\NormalTok{ a)}
 \NormalTok{  )}
 \NormalTok{\}}
 \end{Highlighting}
@@ -316,10 +316,10 @@ Agora vamos calcular \(\hat{y}\) para
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 
 \NormalTok{theta }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
-  \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{), }\CommentTok{\#w1}
-  \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{), }\CommentTok{\#b1}
-  \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{), }\CommentTok{\#w2}
-  \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\CommentTok{\#b2}
+  \AttributeTok{M1 =} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{), }
+  \AttributeTok{b12 =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{), }
+  \AttributeTok{M2 =} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{), }
+  \AttributeTok{b3 =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }
 \NormalTok{)}
 
 \FunctionTok{ffwd}\NormalTok{(x, theta)}
@@ -371,26 +371,38 @@ onde \(m\) é o número de observações.
 \NormalTok{J.Loss }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dados, theta, target)\{}
   
   \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.data.frame}\NormalTok{(dados) }\SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{is\_tibble}\NormalTok{(dados))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Dados deve ser uma dataframe ou tibble."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Loss: Dados deve ser uma dataframe ou tibble."}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{dim}\NormalTok{(dados)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{!=} \DecValTok{2}\NormalTok{)\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Matriz de dados deve ter 2 colunas."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Loss: Matriz de dados deve ter 2 colunas."}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.list}\NormalTok{(theta))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Theta deve ser uma lista com pesos e viéses."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Loss: Theta deve ser uma lista com pesos e viéses."}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(target))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Target deve ser um vetor numérico."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Loss: Target deve ser um vetor numérico."}\NormalTok{)}
 \NormalTok{  \}}
   
 \CommentTok{\# aloca memoria para o tamanho dos dados}
 \NormalTok{  yhat }\OtherTok{\textless{}{-}} \FunctionTok{double}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(dados))}
+  
+\CommentTok{\# aloca memoria para os valores pre ativação dos \textquotesingle{}a\textquotesingle{}  }
+\NormalTok{  a }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \FunctionTok{nrow}\NormalTok{(dados), }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{dimnames =} \FunctionTok{list}\NormalTok{(}\ConstantTok{NULL}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{)))}
+
+  
 \CommentTok{\# transpoe os dados para termos acesso aos vetores de x que serao passados para a primeira camada da rede}
 \NormalTok{  tdados }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(dados))}
   
   \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(tdados))\{}
 \NormalTok{    yhat[i] }\OtherTok{\textless{}{-}} \FunctionTok{ffwd}\NormalTok{(tdados[,i], theta)}\SpecialCharTok{$}\NormalTok{yhat}
+\NormalTok{    a[i,] }\OtherTok{\textless{}{-}} \FunctionTok{ffwd}\NormalTok{(tdados[,i], theta)}\SpecialCharTok{$}\NormalTok{pre\_activation}
 \NormalTok{  \}}
   
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{mean}\NormalTok{((target }\SpecialCharTok{{-}}\NormalTok{ yhat)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)) }\CommentTok{\#média ja entrega soma/m}
-  
+  \FunctionTok{return}\NormalTok{(}
+    \FunctionTok{list}\NormalTok{(}
+      \AttributeTok{loss =} \FunctionTok{mean}\NormalTok{((target }\SpecialCharTok{{-}}\NormalTok{ yhat)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }\CommentTok{\#média ja entrega soma/m}
+      \AttributeTok{yhat =}\NormalTok{ yhat,}
+      \AttributeTok{pre\_activation =}\NormalTok{ a,}
+      \AttributeTok{hidden =} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{phi}\NormalTok{(a[,}\DecValTok{1}\NormalTok{]), }\FunctionTok{phi}\NormalTok{(a[,}\DecValTok{2}\NormalTok{])), }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  )}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -425,7 +437,7 @@ custo da rede com \(\boldsymbol{\theta} = (0.1, \dots, 0.1)\).
   \FunctionTok{pull}\NormalTok{(y)}
 
 \CommentTok{\# theta já foi gerado e será reaproveitado}
-\FunctionTok{J.Loss}\NormalTok{(x\_test, theta, y\_test)}
+\FunctionTok{J.Loss}\NormalTok{(x\_test, theta, y\_test)}\SpecialCharTok{$}\NormalTok{loss}
 \end{Highlighting}
 \end{Shaded}
 
@@ -525,7 +537,7 @@ explicitamos cada componente do gradiente\footnote{Essa notação poderia
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i) \, w_5 \frac{e^{a_{1i}}}{(1+e^{a_{1i}})^2} \\ \\ 
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i) \, w_6 \frac{e^{a_{2i}}}{(1+e^{a_{2i}})^2} \\ \\ 
 \frac{2}{m} \sum\limits^m_{i = 1}(y - \hat{y}_i)(-1)
-\end{pmatrix}
+\end{pmatrix} \label{102}
 \end{align}  
 
 ~
@@ -542,56 +554,295 @@ evitar realizar a mesma operação múltiplas vezes.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-na função, para responder de D a F:
-
-function(theta, dados, target, optimize = TRUE, learning\_rate = NULL,
-epochs = NULL, plot = FALSE)
-
-\begin{itemize}
-\tightlist
-\item
-  optimize: se true, otimiza. Se false, retorna o gradiente. padrao é
-  true.
-\item
-  learning rate
-\item
-  iteracoes: numero de iteracoes
-\item
-  plot: se true, gera um elemento da lista de saída com o custo em cada
-  iteracao. padrao é false.
-\end{itemize}
+Primeiramente, implementamos o gradiente encontrado em (\ref{102}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{backpropagation }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(theta, dados, target, }\AttributeTok{optimize =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{learning\_rate =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{epochs =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{plot =} \ConstantTok{FALSE}\NormalTok{)\{}
+\NormalTok{gradiente }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dados, theta, target)\{}
   
   \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.list}\NormalTok{(theta))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Theta deve ser uma lista com pesos e viéses."}\NormalTok{)}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.data.frame}\NormalTok{(dados) }\SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{is.tibble}\NormalTok{(dados))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Dados deve ser uma dataframe ou tibble."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Gradiente: Theta deve ser uma lista com pesos e viéses."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.data.frame}\NormalTok{(dados) }\SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{is\_tibble}\NormalTok{(dados))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Gradiente: Dados deve ser uma dataframe ou tibble."}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(target))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Target deve ser um vetor numérico."}\NormalTok{)}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.logical}\NormalTok{(optimize))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Optimize deve ser um valor lógico."}\NormalTok{)}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(learning\_rate) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(learning\_rate))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Learning rate deve ser um número real."}\NormalTok{)}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(epochs) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(epochs))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Epochs deve ser um número inteiro."}\NormalTok{)}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.logical}\NormalTok{(plot))\{}
-    \FunctionTok{stop}\NormalTok{(}\StringTok{"Plot deve ser um valor lógico."}\NormalTok{)}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Gradiente: Target deve ser um vetor numérico."}\NormalTok{)}
 \NormalTok{  \}}
+
+\NormalTok{  loss\_results }\OtherTok{\textless{}{-}} \FunctionTok{J.Loss}\NormalTok{(dados, theta, target)}
   
-\CommentTok{\# y é o target}
-\CommentTok{\# yhat é o resultado da ffwd$yhat}
-\CommentTok{\# todos ws vem da theta}
-\CommentTok{\# x vem dos dados}
-\CommentTok{\# as vem da ffwd$pre\_activation}
-\CommentTok{\# h vem da ffwd$hidden}
+  \CommentTok{\# vetor de yhat}
+\NormalTok{  yhat }\OtherTok{\textless{}{-}}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{yhat}
   
+  \CommentTok{\# pre\_activation da J.Loss retorna o vetor de \textquotesingle{}a\textquotesingle{}}
+\NormalTok{  a }\OtherTok{\textless{}{-}}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{pre\_activation}
+  \CommentTok{\#transformacao em nos neuronios pre{-}ativacao}
+\NormalTok{  a}\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(a)}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(a))}\SpecialCharTok{\^{}}\DecValTok{2}
+  
+  \CommentTok{\# diferenca entre (target) y e yhat}
+\NormalTok{  diff }\OtherTok{\textless{}{-}}\NormalTok{ (target}\SpecialCharTok{{-}}\NormalTok{yhat)}
+  
+  \CommentTok{\# dados como uma matriz}
+\NormalTok{  dados }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(dados)}
+  
+\NormalTok{  g\_w1 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{dados[,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{1}\NormalTok{]) }\CommentTok{\#x1, a1, w5}
+\NormalTok{  g\_w2 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{dados[,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{2}\NormalTok{]) }\CommentTok{\#x1, a2, w6}
+\NormalTok{  g\_w3 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{dados[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{1}\NormalTok{]) }\CommentTok{\#x2, a1, w5}
+\NormalTok{  g\_w4 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{dados[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{2}\NormalTok{]) }\CommentTok{\#x2, a2, w6}
+\NormalTok{  g\_w5 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{loss\_results}\SpecialCharTok{$}\NormalTok{hidden[,}\DecValTok{1}\NormalTok{])) }\CommentTok{\#h1}
+\NormalTok{  g\_w6 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{loss\_results}\SpecialCharTok{$}\NormalTok{hidden[,}\DecValTok{2}\NormalTok{])) }\CommentTok{\#h2}
+\NormalTok{  g\_b1 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{1}\NormalTok{]) }\CommentTok{\#a1, w5}
+\NormalTok{  g\_b2 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{theta[[}\DecValTok{3}\NormalTok{]][}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a[,}\DecValTok{2}\NormalTok{]) }\CommentTok{\#a2, w6}
+\NormalTok{  g\_b3 }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(diff}\SpecialCharTok{*}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{))}
+  
+\NormalTok{  grad }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(g\_w1, g\_w2, g\_w3, g\_w4, g\_w5, g\_w6, g\_b1, g\_b2, g\_b3)}
+  \FunctionTok{names}\NormalTok{(grad) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"w1"}\NormalTok{, }\StringTok{"w2"}\NormalTok{, }\StringTok{"w3"}\NormalTok{, }\StringTok{"w4"}\NormalTok{, }\StringTok{"w5"}\NormalTok{, }\StringTok{"w6"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{, }\StringTok{"b3"}\NormalTok{)}
+  
+
+  
+  \FunctionTok{return}\NormalTok{(  }
+    \FunctionTok{list}\NormalTok{(}\AttributeTok{grad =}\NormalTok{ grad,}
+       \AttributeTok{loss\_results =} \FunctionTok{list}\NormalTok{(}
+         \AttributeTok{loss =}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{loss,}
+         \AttributeTok{yhat =}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{yhat,}
+         \AttributeTok{hidden =}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{hidden,}
+         \AttributeTok{pre\_activation =}\NormalTok{ loss\_results}\SpecialCharTok{$}\NormalTok{pre\_activation}
+\NormalTok{        )}
+\NormalTok{       )}
+\NormalTok{    )}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
+~
+
+É apresentado a seguir o resultado da função aplicada sobre o banco de
+treinamento, quando \(\theta = (0.1, \dots , 0.1)\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{gradiente}\NormalTok{(dados\_train[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], theta, dados\_train}\SpecialCharTok{$}\NormalTok{y)}\SpecialCharTok{$}\NormalTok{grad }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Componente =} \FunctionTok{c}\NormalTok{(}\StringTok{"w1"}\NormalTok{, }\StringTok{"w2"}\NormalTok{, }\StringTok{"w3"}\NormalTok{, }\StringTok{"w4"}\NormalTok{, }\StringTok{"w5"}\NormalTok{, }\StringTok{"w6"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{, }\StringTok{"b3"}\NormalTok{),}
+         \AttributeTok{Derivada =}\NormalTok{ .}\SpecialCharTok{$}\NormalTok{value) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\toprule\noalign{}
+Componente & Derivada \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+w1 & 0.1767887 \\
+w2 & 0.1767887 \\
+w3 & -0.6458047 \\
+w4 & -0.6458047 \\
+w5 & -22.3246918 \\
+w6 & -22.3246918 \\
+b1 & 1.0732662 \\
+b2 & 1.0732662 \\
+b3 & -43.4113383 \\
+\end{longtable}
+
+\subsection{Item e}\label{item-e}
+
+Aplique o método do gradiente para encontrar os parâmetros que minimizam
+a função de custo no \textbf{banco de validação}. Inicie o algoritmo no
+ponto \(\theta = (0, \dots , 0)\), use taxa de aprendizagem
+\(\epsilon = 0.1\) e rode o algoritmo por 100 iterações. Reporte o menor
+custo obtido e indique em qual iteração ele foi observado. Apresente
+também o vetor de pesos estimado e comente o resultado.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Para a \emph{backpropagation} foi implementada a função a seguir que
+funciona em um de dois modos: por número de iterações ou por critério de
+aceitação. Neste caso, deve ser fornecido um limiar do valor da função
+de custo para que o algoritmo pare.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{backpropagation }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dados, theta, target, }\AttributeTok{learning\_rate =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{epochs =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{acceptance =} \ConstantTok{NULL}\NormalTok{)\{}
+  
+  \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.list}\NormalTok{(theta))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Theta deve ser uma lista com pesos e viéses."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.data.frame}\NormalTok{(dados) }\SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{is\_tibble}\NormalTok{(dados))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Dados deve ser uma dataframe ou tibble."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(target))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Target deve ser um vetor numérico."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ((}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(epochs) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(acceptance)) }\SpecialCharTok{|}\NormalTok{ (}\FunctionTok{is.null}\NormalTok{(epochs) }\SpecialCharTok{\&} \FunctionTok{is.null}\NormalTok{(acceptance)))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Escolha se devem ser realizadas iterações programadas ou se o critério de parada será definido por um limite."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(learning\_rate) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(learning\_rate) }\SpecialCharTok{\&}\NormalTok{ learning\_rate }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Learning rate deve ser um número real positivo."}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.integer}\NormalTok{(epochs) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(epochs))\{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"Back propagation: Epochs deve ser um número inteiro positivo."}\NormalTok{)}
+\NormalTok{  \}}
+  
+
+\CommentTok{\# Se for definido por learning rate}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(learning\_rate))\{}
+\NormalTok{  loss\_history }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(epochs)}
+\CommentTok{\# initiate loop }
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{epochs)\{}
+    \CommentTok{\#1 forward computation and gradient}
+\NormalTok{    grad\_results }\OtherTok{\textless{}{-}} \FunctionTok{gradiente}\NormalTok{(dados, theta, target)}
+    \CommentTok{\# disponivel: }
+    \DocumentationTok{\#\# gradiente.}
+    \DocumentationTok{\#\# loss results: yhat, hidden, pre\_activation}
+\NormalTok{    loss\_history[i] }\OtherTok{\textless{}{-}}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{loss\_results}\SpecialCharTok{$}\NormalTok{loss}
+    \CommentTok{\#2 back propagate the gradient}
+    \CommentTok{\# novos pesos = theta {-} learning rate * gradiente}
+   
+\NormalTok{    gradient\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+      \AttributeTok{W1\_update =} \FunctionTok{matrix}\NormalTok{(grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{], }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+      \AttributeTok{b12\_update =}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{7}\SpecialCharTok{:}\DecValTok{8}\NormalTok{],}
+      \AttributeTok{W2\_update =} \FunctionTok{matrix}\NormalTok{(grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{5}\SpecialCharTok{:}\DecValTok{6}\NormalTok{], }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+      \AttributeTok{b3\_update =}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{9}\NormalTok{]}
+\NormalTok{    )}
+    
+\NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{( }\CommentTok{\#usaremos o mesmo nome para atualizar no loop}
+      \AttributeTok{W1 =}\NormalTok{ theta[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{W1\_update,}
+      \AttributeTok{b12 =}\NormalTok{ theta[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{b12\_update,}
+      \AttributeTok{W2 =}\NormalTok{ theta[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{W2\_update,}
+      \AttributeTok{b3 =}\NormalTok{ theta[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{b3\_update}
+\NormalTok{    )}
+\NormalTok{  \} }
+  \CommentTok{\# outputs: pesos finais e histórico de loss}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}
+    \AttributeTok{theta =}\NormalTok{ theta,}
+    \AttributeTok{loss\_history =}\NormalTok{ loss\_history}
+\NormalTok{    )}
+\NormalTok{  )}
+\NormalTok{ \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(acceptance))\{}
+   \CommentTok{\# Se for definido por acceptance}
+   
+\NormalTok{   i }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{   loss\_history }\OtherTok{\textless{}{-}} \ConstantTok{Inf}
+   
+   \ControlFlowTok{while}\NormalTok{(loss\_history[i] }\SpecialCharTok{\textgreater{}}\NormalTok{ acceptance)\{}
+     \CommentTok{\#1 forward computation and gradient}
+\NormalTok{    grad\_results }\OtherTok{\textless{}{-}} \FunctionTok{gradiente}\NormalTok{(dados, theta, target)}
+    \CommentTok{\# disponivel: }
+    \DocumentationTok{\#\# gradiente.}
+    \DocumentationTok{\#\# loss results: yhat, hidden, pre\_activation}
+\NormalTok{    loss\_history[i] }\OtherTok{\textless{}{-}}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{loss\_results}\SpecialCharTok{$}\NormalTok{loss}
+    \CommentTok{\#2 back propagate the gradient}
+    \CommentTok{\# novos pesos = theta {-} learning rate * gradiente}
+   
+\NormalTok{    gradient\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+      \AttributeTok{W1\_update =} \FunctionTok{matrix}\NormalTok{(grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{], }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+      \AttributeTok{b12\_update =}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{7}\SpecialCharTok{:}\DecValTok{8}\NormalTok{],}
+      \AttributeTok{W2\_update =} \FunctionTok{matrix}\NormalTok{(grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{5}\SpecialCharTok{:}\DecValTok{6}\NormalTok{], }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+      \AttributeTok{b3\_update =}\NormalTok{ grad\_results}\SpecialCharTok{$}\NormalTok{grad[}\DecValTok{9}\NormalTok{]}
+\NormalTok{    )}
+    
+\NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{( }\CommentTok{\#usaremos o mesmo nome para atualizar no loop}
+      \AttributeTok{W1 =}\NormalTok{ theta[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{W1\_update,}
+      \AttributeTok{b12 =}\NormalTok{ theta[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{b12\_update,}
+      \AttributeTok{W2 =}\NormalTok{ theta[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{W2\_update,}
+      \AttributeTok{b3 =}\NormalTok{ theta[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ learning\_rate}\SpecialCharTok{*}\NormalTok{gradient\_list}\SpecialCharTok{$}\NormalTok{b3\_update}
+\NormalTok{    )}
+\NormalTok{    i }\OtherTok{\textless{}{-}}\NormalTok{ i}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{   \}}
+   \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}
+    \AttributeTok{theta =}\NormalTok{ theta,}
+    \AttributeTok{loss\_history =}\NormalTok{ loss\_history,}
+    \AttributeTok{iterations =}\NormalTok{ i}\DecValTok{{-}1}
+\NormalTok{    )}
+\NormalTok{   )}
+\NormalTok{ \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+A seguir é apresentado o resultado da função aplicada sobre o banco de
+validação, quando \(\theta = (0, \dots , 0)\), com taxa de aprendizagem
+\(\epsilon = 0.1\) e 100 iterações.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theta }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{W1 =} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+  \AttributeTok{b12 =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{),}
+  \AttributeTok{W2 =} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{),}
+  \AttributeTok{b3 =} \DecValTok{0}
+\NormalTok{)}
+
+\NormalTok{learning\_rate }\OtherTok{\textless{}{-}}  \FloatTok{0.1}
+
+\NormalTok{epochs }\OtherTok{\textless{}{-}} \DecValTok{100}\NormalTok{L}
+
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ dados\_valid}\SpecialCharTok{$}\NormalTok{y}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ dados\_valid[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]}
+
+\NormalTok{back\_validacao }\OtherTok{\textless{}{-}} \FunctionTok{backpropagation}\NormalTok{(x, theta, y, learning\_rate, epochs)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+O menor custo obtido foi 164.8767649 e foi observado na iteração 25.
+
+Um gráfico do histórico de custo é apresentado a seguir:
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-historico-custo-1.pdf}
+
+}
+
+\caption{\label{fig-historico-custo}Histórico de custo para o banco de
+validação.}
+
+\end{figure}%
+
+O vetor de pesos estimado foi:
+
+\begin{align*}
+W^{(1)} = \begin{pmatrix} -2.1967097 & -2.1967097 \\ 1.0577389 & 1.0577389 \end{pmatrix}, \quad 
+%
+\boldsymbol{b}^{(1)} = \begin{pmatrix} -6.8399939 \\ -6.8399939 \end{pmatrix},
+\end{align*}
+
+\begin{align*}
+W^{(2)} = \begin{pmatrix} -1.0835418 \\ -1.0835418 \end{pmatrix}, \quad 
+%
+\boldsymbol{b}^{(2)} = 21.8534499.
+\end{align*}
+
+Interessantemente, os pesos de cada variavel para a camada seguinte,
+assim como os viéses, são idênticos. Além disso, os pesos aplicados nos
+neurônios da camada escondida também são idênticos. Isso pode ser um
+indicativo de que ambas as variáveis explicativas possuem importância
+igual para a previsão da variável resposta. Ao mesmo tempo, ambas
+\(X_1\) e \(X_2\) têm o mesmo processo gerador, então não parece ser
+surpreendente que os pesos sejam iguais.
+
+Finalmente, o gráfico indica que possivelmente o algoritmo estacionou em
+um mínimo local de valor superior ao mínimo encontrado na iteração de
+número 25.
+
+\subsection{Item f}\label{item-f}
+
+\section{Lições aprendidas}\label{liuxe7uxf5es-aprendidas}
+
+É muito positivo construir funções que retornam listas com os resultados
+de cada etapa do algoritmo. Isso facilita a depuração e a compreensão do
+código. Além disso, é importante testar cada função separadamente para
+garantir que ela está retornando o resultado esperado.
+
+Frequentemente quando avançava um item, percebia que poderia incrementar
+funções anteriores que já retornavam internamente vetores que seriam
+usados futuramente. Dessa forma, é possível utilizar listas para fazer
+referencias fáceis a componentes de cada etapa e evitar repetições
+desnecessárias de cálculos, reduzindo o custo computacional da lista
+como um todo.
 
 
 
