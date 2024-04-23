@@ -29,7 +29,9 @@ format:
 pacman::p_load(tidyverse, NeuralNetTools,latex2exp, cowplot, microbenchmark, tidymodels)
 ```
 
-Para essa lista, é considerada a seguinte arquitetura de uma rede neural *feed-forward*:
+Para essa lista, é considerada a seguinte arquitetura de uma rede neural *feed-forward*:[^1]
+
+[^1]: Documento disponível no repositório do autor: <https://github.com/cesar-galvao/Topicos-1---Redes-neurais>
 
 ```{r}
 #| label: figf-arquitetura-rede
@@ -84,7 +86,6 @@ ou
 \hat{y} =& W^{(2)\top}\boldsymbol{h} + b^{(2)}
 \end{align*}
 ```
-
 ```{r}
 #| label: feed-forward
 
@@ -125,7 +126,7 @@ ffwd <- function(x, theta) {
 }
 ```
 
-\ 
+ 
 
 Agora vamos calcular $\hat{y}$ para $\boldsymbol{\theta} = (0.1, \dots , 0.1)$ e $\boldsymbol{x} = (1, 1)$.
 
@@ -173,7 +174,7 @@ dados <- tibble(x1.obs=runif(m.obs, -3, 3),
                 y=rnorm(m.obs, mean=mu, sd=1))
 ```
 
-\ 
+ 
 
 Depois, implementamos a função de custo $J(\theta)$, que é dada por
 
@@ -184,14 +185,11 @@ Depois, implementamos a função de custo $J(\theta)$, que é dada por
   =& \frac{1}{m}\sum\limits_{i = 1}^{m} \left( \hat{y}_i - y_i \right)^2,
 \end{align*}
 ```
-
-onde $m$ é o número de observações. 
+onde $m$ é o número de observações.
 
 ```{r}
 #| label: loss-function
 #| depends: setup
-
-# VERIFICAR A CONTA AQUI NO FINAL E PASSAR PARA MATRICIAL
 
 J.Loss <- function(dados, theta, target){
   
@@ -223,7 +221,7 @@ J.Loss <- function(dados, theta, target){
 }
 ```
 
-\ 
+ 
 
 Em seguida, separamos o nosso conjunto de dados em treinamento, validação e teste.
 
@@ -236,7 +234,7 @@ dados_valid <- dados[80001:90000,]
 dados_test <- dados[90001:nrow(dados),]
 ```
 
-\ 
+ 
 
 Finalmente, executamos a função de *feed-forward* nos dados gerados para calcularmos $\boldsymbol{\hat{y}}$ e em seguida calculamos o custo da rede com $\boldsymbol{\theta} = (0.1, \dots, 0.1)$.
 
@@ -256,11 +254,10 @@ y_test <- dados_test %>%
 # theta já foi gerado e será reaproveitado
 J.Loss(x_test, theta, y_test)$loss
 ```
-  
-\  
-  
-Obtemos um custo de `r J.Loss(x_test, theta, y_test)$loss`.
 
+ 
+
+Obtemos um custo de `r J.Loss(x_test, theta, y_test)$loss`.
 
 ## Item c
 
@@ -331,10 +328,9 @@ Para $w_j, j \in \{ 1, 2, 3, 4 \}$,
   \frac{\partial \hat{y}_i}{\partial w_4} &= w_6 \frac{x_{2i} \, e^{-a_2}}{\left(1 + e^{-a_2}\right)^2}.
 \end{align*}
 ```
-Finalmente, substituimos os as componentes na equação (\ref{101}) e explicitamos cada componente do gradiente[^1]:
+Finalmente, substituimos os as componentes na equação (\ref{101}) e explicitamos cada componente do gradiente[^2]:
 
-[^1]: Essa notação poderia ser escrita de forma mais elegante e sucinta. No entanto, dessa forma facilita a comparação entre a expressão analítica e a implementação computacional pelo leitor.
-
+[^2]: Essa notação poderia ser escrita de forma mais elegante e sucinta. No entanto, dessa forma facilita a comparação entre a expressão analítica e a implementação computacional pelo leitor.
 
 ```{=tex}
 \begin{align}
@@ -362,8 +358,7 @@ Finalmente, substituimos os as componentes na equação (\ref{101}) e explicitam
 \end{pmatrix} \label{102}
 \end{align}  
 ```
-
-\ 
+ 
 
 ## Item d
 
@@ -432,21 +427,27 @@ gradiente <- function(dados, theta, target){
 
 \ 
 
-É apresentado a seguir o resultado da função aplicada sobre o banco de treinamento, quando $\theta = (0.1, \dots , 0.1)$:
+É apresentado na @tbl-gradienteaplicacao a seguir o resultado da função aplicada sobre o banco de treinamento, quando $\theta = (0.1, \dots , 0.1)$:
 
 ```{r}
 #| label: gradiente-aplicacao
 #| depends: gradiente, separacao-dados
 
-
 grad_item_d <- gradiente(dados_train[,c(1,2)], theta, dados_train$y)$grad
+```
+
+\ 
+
+```{r}
+#| label: tbl-gradienteaplicacao
+#| tbl-cap: Valores do gradiente para $\boldsymbol{\theta} = (0.1, \dots , 0.1)$
+#| echo: false
 
 grad_item_d %>%
   as_tibble() %>%
   reframe(Componente = c("w1", "w2", "w3", "w4", "w5", "w6", "b1", "b2", "b3"),
          Derivada = value) %>%
   knitr::kable()
-
 ```
 
 
@@ -456,8 +457,7 @@ Aplique o método do gradiente para encontrar os parâmetros que minimizam a fun
 
 ------------------------------------------------------------------------
 
-Para a *backpropagation* foi implementada a função a seguir que funciona em um de dois modos: por número de iterações ou por critério de aceitação. Neste caso, deve ser fornecido um limiar do valor da função de custo para que o algoritmo pare.
-
+A *backpropagation* foi implementada na função a seguir, que exige como hiperparâmetros a taxa de aprendizagem e a quantidade de épocas.
 
 ```{r}
 #| label: back-propagation
@@ -518,7 +518,7 @@ best_theta <- theta
 }
 ```
 
-\ 
+ 
 
 A seguir é apresentado o resultado da função aplicada sobre o banco de validação, quando $\theta = (0, \dots , 0)$, com taxa de aprendizagem $\epsilon = 0.1$ e 100 iterações.
 
@@ -543,7 +543,7 @@ x <- dados_valid[,c(1,2)]
 back_validacao <- backpropagation(x, theta, y, learning_rate, epochs)
 ```
 
-\ 
+ 
 
 O menor custo obtido foi `r min(back_validacao$loss_history)` e foi observado na iteração `r which.min(back_validacao$loss_history)`.
 
@@ -558,6 +558,7 @@ Um gráfico do histórico de custo é apresentado a seguir:
 
 back_validacao$loss_history %>%
   tibble(Iteracao = 1:length(.), Custo = .) %>%
+  filter(Custo < 170) %>%
   ggplot(aes(x = Iteracao, y = Custo)) +
   geom_line() +
   labs(x = "Iteração",
@@ -572,18 +573,20 @@ back_validacao$loss_history %>%
 
 O vetor de pesos estimado para a iteração de menor valor da perda foi:
 
+```{=tex}
 \begin{align*}
 \hat{W}^{(1)} = \begin{pmatrix} `r back_validacao$best_theta$W1[1,1]` & `r back_validacao$best_theta$W1[1,2]` \\ `r back_validacao$best_theta$W1[2,1]` & `r back_validacao$best_theta$W1[2,2]` \end{pmatrix}, \quad 
 %
 \hat{\boldsymbol{b}}^{(1)} = \begin{pmatrix} `r back_validacao$best_theta$b12[1]` \\ `r back_validacao$best_theta$b12[2]` \end{pmatrix},
 \end{align*}
-
+```
+```{=tex}
 \begin{align*}
 \hat{W}^{(2)} = \begin{pmatrix} `r back_validacao$best_theta$W2[1,1]` \\ `r back_validacao$best_theta$W2[2,1]` \end{pmatrix}, \quad 
 %
 \hat{\boldsymbol{b}}^{(2)} = `r back_validacao$best_theta$b3`.
 \end{align*}
-
+```
 Interessantemente, os pesos de cada variavel para a camada seguinte, assim como os viéses, são idênticos. Além disso, os pesos aplicados nos neurônios da camada escondida também são idênticos. Isso pode ser um indicativo de que ambas as variáveis explicativas possuem importância igual para a previsão da variável resposta. Ao mesmo tempo, ambas $X_1$ e $X_2$ têm o mesmo processo gerador, então não parece ser surpreendente que os pesos sejam iguais.
 
 Finalmente, o gráfico indica que possivelmente o algoritmo estacionou em um mínimo local de valor superior ao mínimo encontrado na iteração de número `r which.min(back_validacao$loss_history)`.
@@ -597,7 +600,6 @@ Apresente o gráfico do custo no conjunto de treinamento e no de validação (um
 A seguir é construido o gráfico. Novamemente, trata-se de duas bases de dados relativamente simples, com um mesmo processo gerador dos dados e uma quantidade razoável de pontos, então é esperado que o custo de treinamento e validação sejam semelhantes.
 
 Apesar disso, é possível notar que, na base de treinamento, o algoritmo escapa do mínimo identificado ligeiramente mais rápido, possivelmente devido à maior disponibilidade de dados. Neste caso, a base de treinamento é oito vezes maior que a base de validação.
-
 
 ```{r}
 #| label: fig-historico-custo-treinamento-validacao
@@ -638,10 +640,9 @@ comparacao_treino_validacao %>%
 
 ## Item g
 
-Calcule os valores previstos $(\hat{y}_i)$ e os resíduos $(y_i − \hat{y}_i)$ da rede no conjunto de teste e represente-os graficamente em função de $x_1$ e $x_2$. Dica: tome como base o código usado para a visualização da superfície $(E(Y |X_1, X_2), X_1, X_2)$. Altere o gradiente de cores e, se necessário, use pontos semi-transparentes. Analise o desempenho da rede nas diferentes regiões do plano. Há locais onde o modelo é claramente viesado ou menos acurado?
+Calcule os valores previstos $(\hat{y}_i)$ e os resíduos $(y_i - \hat{y}_i)$ da rede no conjunto de teste e represente-os graficamente em função de $x_1$ e $x_2$. Dica: tome como base o código usado para a visualização da superfície $(E(Y |X_1, X_2), X_1, X_2)$. Altere o gradiente de cores e, se necessário, use pontos semi-transparentes. Analise o desempenho da rede nas diferentes regiões do plano. Há locais onde o modelo é claramente viesado ou menos acurado?
 
 ------------------------------------------------------------------------
-
 
 ```{r}
 #| label: predicao-residuos
@@ -671,7 +672,8 @@ plot_residuos <- ggplot(dados_graf_residuos, aes(x=x1.obs, y=x2.obs)) +
     high="black",
     name="Resíduos") +
   xlab(TeX("$X_1$")) + ylab(TeX("$X_2$"))+
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        axis.title.y = element_text(angle = 0, vjust = 0.5))
 
 #gráfico da esperança
 n <- 100
@@ -688,12 +690,12 @@ plot_esperanca <- ggplot(dados.grid, aes(x=x1, y=x2)) +
   high="black",
   name=TeX("$E(Y|X_1, X_2)$")) +
   xlab(TeX("$X_1$")) + ylab(TeX("$X_2$"))+
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        axis.title.y = element_text(angle = 0, vjust = 0.5))
 ```
 
-\ 
 
-O gráfico dos resíduos utilizando o gradiente implementado e o gráfico da esperança são apresentados a seguir. Interessantemente, o resíduo parece ser parece ser maior em regiões em que a esperança $E(Y |X_1, X_2)$ é maior e menor onde a esperança é menor. 
+O gráfico dos resíduos utilizando o gradiente implementado e o gráfico da esperança são apresentados a seguir. Interessantemente, o resíduo parece ser parece ser maior em regiões em que a esperança $E(Y |X_1, X_2)$ é maior e menor onde a esperança é menor. A região de resíduos próximos a zero é uma região intermediária que margeia o senóide.
 
 ```{r}
 #| label: fig-predicao-residuos
@@ -708,13 +710,13 @@ Faça um gráfico do valor observado $y_i$ em função do valor esperado $\hat{y
 
 ------------------------------------------------------------------------
 
-No gráfico abaixo é possível observar que os valores de $\hat{y}$ tendem a se concentrar nas extremidades, parece haver uma sobreposição de comportamentos na transição entre os valores extremos do valor esperado.
+No gráfico abaixo é possível observar que os valores de $\hat{y}$ tendem a se concentrar nas extremidades e parece haver uma sobreposição de comportamentos na transição entre os valores extremos do valor esperado.
 
-Enquanto parece haver uma grande dispersão em toda a região observada, os valores entre os extremos de $\hat{y}$ parecem ter menor variância e estão mais concentrados em torno do valor esperado --- apesar de haver pontos bem distantes. Pode-se dizer que o modelo é mais viesado para valores extremos de $\hat{y}$.
-
+Enquanto parece haver uma grande dispersão em toda a região observada, os valores entre os extremos de $\hat{y}$ parecem ter menor variância e estão mais concentrados em torno do valor esperado --- apesar de haver pontos bem distantes. Além disso, fica evidente a maior variância para para valores extremos de $\hat{y}$.
 
 ```{r}
-#| label: fig-esperado-observado
+#| label: fig-esperadoobservado
+#| fig-cap: Valor observado em função do valor esperado gerado pela rede neural.
 
 dados_graf_residuos %>%
   ggplot(aes(yhat, y))+
@@ -731,7 +733,6 @@ dados_graf_residuos %>%
     axis.title.y = element_text(angle = 0, vjust = 0.5)) 
 
 ```
-
 
 ## Item i
 
@@ -765,12 +766,13 @@ valores_w1 <- tibble(
 
 ```
 
-\ 
+
 
 O gráfico do valor de $w_1$ calculado em função do tamanho da amostra é exibido a seguir. Como é de se esperar, o valor de $w_1$ tende a se aproximar do valor obtido no item d) à medida que o tamanho da amostra aumenta.
 
 ```{r}
 #| label: fig-gradientek
+#| fig-cap: Valor do gradiente $\frac{\partial J}{\partial w_1}$ em função do tamanho da amostra.
 
 ggplot(valores_w1, aes(k, w1, group = 1))+
   geom_line()+
@@ -790,32 +792,33 @@ ggplot(valores_w1, aes(k, w1, group = 1))+
 
 ```
 
-\  
+\ 
 
+Nota-se do gráfico na @fig-gradientek que o valor de $w_1$ tende a se aproximar do valor obtido no item d) à medida que o tamanho da amostra aumenta. Ao mesmo tempo, o resultado do benchmark exposto na @tbl-microbenchmark sugere um tempo muito menor para o cálculo do gradiente com amostras menores. Se com uma amostra de tamanho 300 o tempo médio de execução tem uma diferença de duas ordens de grandeza em relação à amostra de tamanho 100.000 e o resultado para o gradiente é muito próximo, uma possibilidade para acelerar ainda mais a execução do item e) seria realizar o cálculo do gradiente em pacotes (*batches*).
 
 ```{r}
-#| label: microbenchmark-gradiente
+#| label: tbl-microbenchmark
+#| tbl-cap: Resultados do microbenchmark para o cálculo do gradiente com k = 300 e k = 100.000.
 
-res <- microbenchmark::microbenchmark(
+microbenchmark::microbenchmark(
   k_300 = k_w1(dados, theta, 300),
   k_100000 = k_w1(dados, theta, 100000),
   times = 100
-) 
-
+) %>%
+  summary() %>%
+  select(-neval) %>%
+  knitr::kable(digits = 2)
 ```
 
 \ 
 
-Como esses resultados podem ser usados para acelerar a execução do item e)?
-
-
 ## Item j
 
 Ajuste sobre o conjunto de treinamento um modelo linear normal (modelo linear 1)
-
 $$
 Y_i = N \left(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma \right)
-$$
+$$ 
+
 usando a função `lm` do pacote `R` (ou outra equivalente). Em seguida, inclua na lista de covariáveis termos quadráticos e de interação linear. Isso é, assuma que no modelo linear 2,
 
 $$
@@ -840,25 +843,27 @@ MSE2 <- lm(y ~ x1.obs*x2.obs + I(x1.obs^2) + I(x2.obs^2), data = dados_train) %>
   anova() %>% 
   pull(`Mean Sq`) %>%
   min()
+
+MSErn <- min(back_validacao$loss_history)
 ```
 
 As perdas quadráticas são expostas na tabela a seguir:
 
 ```{r}
 #| label: tbl-MSE
+#| echo: false
+#| tbl-cap: Perdas quadráticas dos modelos ajustados.
 
 tibble(
   Modelo = c("Rede Neural", "Modelo Linear 1", "Modelo Linear 2"),
-  MSE = c(min(back_validacao$loss_history), MSE1, MSE2)
+  MSE = c(MSErn, MSE1, MSE2)
 ) %>%
   mutate(MSE = round(MSE, 2)) %>%
   knitr::kable()
 ```
 
-\ 
 
 Pautado exclusivamente pelas perdas quadráticas, o modelo que deveria ser escolhido deveria ser o Modelo Linear 2, que inclui interações e termos quadráticos. No entanto, é importante considerar também a capacidade de generalização do modelo. Uma avaliação desses modelos considerando outras bases de dados para teste seria necessária para determinar o melhor desempenho.
-
 
 ## Item k
 
@@ -866,43 +871,157 @@ Para cada modelo ajustado (os dois lineares e a rede neural), descreva o efeito 
 
 ------------------------------------------------------------------------
 
-Para o Modelo 1, o incremento no valor esperado da variável resposta em função de $x_1$ é representado apenas por $\beta_1$. Para o Modelo 2, o incremento unitário no valor esperado da variável resposta é representado por $\frac{d \hat{y}}{d \, x_1} = \beta_1 + 2\beta_3x_1 + \beta_5x_2$. Para a rede neural, o incremento unitário no valor esperado da variável resposta é representado pelos pesos de $\boldsymbol{\theta}$ associados a $x_1$, ou seja, $w_1$ e $w_2$.
-
-Temos portanto, como variação no valor esperado da variável resposta em função do incremento unitário de $x_1$:
-
 ```{r}
 #| label: efeito-x1
 #| echo: false
 
-x1m1 <- lm(y ~ x1.obs + x2.obs, data = dados_train) %>%
-  summary() %>% 
-  tidy()
+x1m1 <- lm(y ~ x1.obs + x2.obs, data = dados_train) 
 
-x1m2 <-  lm(y ~ x1.obs*x2.obs + I(x1.obs^2) + I(x2.obs^2), data = dados_train) %>%
-  summary() %>% 
-  tidy()
+x1m2 <-  lm(y ~ x1.obs*x2.obs + I(x1.obs^2) + I(x2.obs^2), data = dados_train)
 
 x2rn <- back_validacao$best_theta$W1
 ```
 
-o efeito de x1 na rede neural é a soma dos pesos w1 e w2? e como faz no modelo 2?
+Temos como variação no valor esperado da variável resposta em função do incremento unitário de $x_1$ as expressões e valores a seguir:
 
-- Modelo 1: `r x1m1$estimate[2]`
-- Modelo 2: `r x1m2$estimate[2]` + `r 2*x1m2$estimate[4]`$x_1$ + `r x1m2$estimate[6]` $x_2$
-- Rede Neural: `r sum(x2rn[1,])`
+**Modelo 1**  
 
+$\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =$  `r (x1m1 %>% summary() %>% tidy())$estimate[2] %>% round(2)`
+\ 
+
+**Modelo 2** 
+
+$\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 + 2\hat{\beta}_3 \, x_1 + \hat{\beta}_5 x_2 =$ `r (x1m2 %>% summary() %>% tidy())$estimate[2] %>% round(2)` + `r 2*(x1m2 %>% summary() %>% tidy())$estimate[4] %>% round(2)`$x_1$ + `r (x1m2 %>% summary() %>% tidy())$estimate[6]` $x_2$
+\ 
+
+**Rede Neural** 
+
+$\frac{\partial \, \hat{y}_i}{\partial \, x_{1i}} = w_5 \, \frac{\partial}{\partial x_{1i}} h_{1i} + w_6\, \frac{\partial}{\partial x_{1i}} h_{2i} = w_5w_1 \, \frac{e^{-a_{1i}}}{(1+e^{a_{1i}})^2} + w_6w_2 \, \frac{e^{-a_{2i}}}{(1+e^{a_{2i}})^2}$
 
 ## Item l
 
-Novamente, para cada um dos 3 modelos em estudo, calcule o percentual de vezes que o intervalo de confiança de 95% (para uma nova observação!) capturou o valor de $y_i$ . Considere apenas os dados do conjunto de teste. No caso da rede neural, assuma que, aproximadamente, $\frac{y_i - \hat{y}_i}{\hat{\sigma}} ∼ N (0, 1)$, onde $\hat{\sigma}$  representa a raiz do erro quadrático médio da rede. Comente os resultados. Dica: para os modelos lineares, use a função `predict(mod, interval="prediction")`.
+Novamente, para cada um dos 3 modelos em estudo, calcule o percentual de vezes que o intervalo de confiança de 95% (para uma nova observação!) capturou o valor de $y_i$ . Considere apenas os dados do conjunto de teste. No caso da rede neural, assuma que, aproximadamente, $\frac{y_i - \hat{y}_i}{\hat{\sigma}} \sim N (0, 1)$, onde $\hat{\sigma}$ representa a raiz do erro quadrático médio da rede. Comente os resultados. Dica: para os modelos lineares, use a função `predict(mod, interval="prediction")`.
 
 ------------------------------------------------------------------------
 
-### Item m
+Utilizamos os modelos gerados com a base de treinamento para fazer a avaliação sobre os dados de teste.
 
-Para o modelo linear 1, faça um gráfico de disperção entre $x_1$ e $x_2$ , onde cada ponto corresponde a uma observação do conjunto de teste. Identifique os pontos que estavam contidos nos respectivos intervalos e confianças utiliizando a cor verde. Para os demais pontos, use vermelho. Comente o resultado.
+```{r}
+#| label: intervalos-confianca
+
+# modelo 1
+predictm1 <- predict(x1m1, interval="prediction", newdata = dados_test) %>%
+  tidy() %>%
+  as.matrix(ncol = 3)
+
+withinm1 <- (dados_test$y >= predictm1[,2] & dados_test$y <= predictm1[,3]) %>%
+  mean()
+
+# modelo 2
+predictm2 <- predict(x1m2, interval="prediction", data = dados_test) %>%
+  tidy() %>%
+  as.matrix(ncol = 3)
+
+withinm2 <- (dados_test$y >= predictm2[,2] & dados_test$y <= predictm2[,3]) %>%
+  mean()
+
+# rede neural
+tabela_withinrn <- tibble(
+  yhat = ffwd(dados_test[,c(1,2)], back_validacao$best_theta)$yhat,
+  sigma = sqrt(min(back_validacao$loss_history)),
+  y = dados_test$y,
+  std_y = (y-yhat)/sigma
+) %>%
+  mutate(
+    lower = yhat - 1.96*sigma,
+    upper = yhat + 1.96*sigma,
+    within = (y >= lower & y <= upper)
+  )  
+
+withinrn <- tabela_withinrn%>%
+  pull(within) %>%
+  mean()
+```
+
+As proporções dos valores de $y_i$ que foram capturados pelos intervalos de confiança gerados são exibidos na @tbl-intervalos-confianca a seguir. Enquanto o Modelo 2 obteve o menor MSE, a proporção dos valores reais capturados pelo intervalo de confiança foi a menor entre os três modelos. Em comparação, a rede neural apresentou o maior MSE, mas uma proporção de captura muito similar ao Modelo Linear 1.
+
+```{r}
+#| label: tbl-intervalos-confianca
+#| echo: false
+#| tbl-cap: Proporção de valores de $y_i$ capturados pelos intervalos de confiança de 95%.
+
+tibble(
+  Modelo = c("Modelo Linear 1", "Modelo Linear 2", "Rede Neural"),
+  Proporção = c(withinm1, withinm2, withinrn),
+  MSE = c(MSE1, MSE2,MSErn)
+) %>%
+  knitr::kable(digits = 2)
+```
+
+## Item m
+
+Para o modelo linear 1, faça um gráfico de dispersão entre $x_1$ e $x_2$ onde cada ponto corresponde a uma observação do conjunto de teste. Identifique os pontos que estavam contidos nos respectivos intervalos de confiança utilizando a cor verde. Para os demais pontos, use vermelho. Comente o resultado.
 
 ------------------------------------------------------------------------
+
+A seguir é construído o gráfico de dispersão conforme a instrução. Além disso, o gráfico da esperança condicional de $Y$ em função de $X_1$ e $X_2$ é apresentado para comparação. Interessantemente os pontos contidos nos intervalos de confiança parecem estar mais concentrados nas regiões de maior valor da esperança condicional. No entanto, há pontos no terceiro quadrante, que possuem baixos valores na esperança condicional, que também não foram capturados --- esse padrão não se repete em outros setores do gráfico. O padrão de não-captura (dentro do domínio de $X_1$ e $X_2$ que estamos considerando) aparenta ser de baixos valores de $X_1$ com valoires extremos de $X_2$ altos valores de $X_1$ dentro de um intervalo entre -1 e -2 para $X_2$.
+
+
+```{r}
+#| label: fig-intervaloconfianca
+#| fig-cap: Pontos contidos nos intervalos de confiança de 95% para o Modelo Linear 1.
+
+tabela <- as_tibble(predictm1) %>%
+  rlang::set_names("yhat","lower", "upper") %>%
+  mutate(y = dados_test$y,
+         within = (y >= lower & y <= upper),
+         x1 = dados_test$x1.obs,
+         x2 = dados_test$x2.obs)
+  
+plot_regressao <- ggplot(tabela, aes(x1, x2, color = within))+
+  geom_point(alpha = 0.09)+
+  scale_color_manual(values = c("green", "red")) +
+  theme_bw()+
+  labs(x = TeX("$x_1$"), y = TeX("$x_2$"), color = "Dentro do IC")+
+  theme(panel.border = element_blank(), # Remove all panel borders
+    axis.line = element_line(color = "#474747"), # Add axis lines
+    axis.ticks.x = element_line(color = "#474747"), # X axis ticks
+    axis.ticks.y = element_line(color = "#474747"), # Y axis ticks
+    axis.ticks.length = unit(0.05, "cm"), # Control tick length
+    legend.position = "bottom",
+    axis.title.y = element_text(angle = 0, vjust = 0.5))
+
+plot_grid(plot_regressao, plot_esperanca, ncol=2)
+```
+
+\ 
+
+Para comparação, é feito o mesmo gráfico para os intervalos de confiança da rede neural. Em comparação ao caso anterior, há um padrão que se assemelha ao gráfico da esperança condicional. Parte do vale no senóide não é capturado, especificamente os próximos e pertencentes ao terceiro quadrante, assim como valores de alta esperança no quarto quadrante.
+
+```{r}
+#| label: fig-intervaloconfiancarede
+#| fig-cap: Pontos contidos nos intervalos de confiança de 95% para a Rede Neural.
+  
+tabela_withinrn %>%
+  mutate(x1 = dados_test$x1.obs,
+         x2 = dados_test$x2.obs) %>%
+  ggplot(aes(x1, x2, color = within))+
+  scale_color_manual(values = c("green", "red")) +
+  geom_point(alpha = 0.12)+
+  theme_bw()+
+  labs(x = TeX("$x_1$"), y = TeX("$x_2$"), color = "Dentro do IC")+
+  theme(panel.border = element_blank(), # Remove all panel borders
+    axis.line = element_line(color = "#474747"), # Add axis lines
+    axis.ticks.x = element_line(color = "#474747"), # X axis ticks
+    axis.ticks.y = element_line(color = "#474747"), # Y axis ticks
+    axis.ticks.length = unit(0.05, "cm"), # Control tick length
+    legend.position = "bottom",
+    axis.title.y = element_text(angle = 0, vjust = 0.5),
+    aspect.ratio = 1)
+```
+
+
+
 
 # Lições aprendidas
 
@@ -913,3 +1032,5 @@ Frequentemente quando avançava um item, percebia que poderia incrementar funç�
 A utilização de `cache: true` na seção YAML do documento é muito útil para economizar tempo para renderizar versões incrementadas do documento, especialmente no caso de termos que executar várias vezes cálculos custosos como o back propagation --- Isso foi escrito quando eu usava o processo de *back-propagation* dentro de um `for`.
 
 O tempo de processamento foi reduzido de 10 minutos a 5s usando contas matriciais. No entanto, tive muitos problemas na hora de converter o código. Uma revisão bem detalhada teve que ser feita para identificar pequenos problemas de matrizes transpostas.
+
+Para os gráficos, poderia ter sido mais econômico em termos de linhas de código se tivesse montado uma função para toda a configuração do `theme()`.

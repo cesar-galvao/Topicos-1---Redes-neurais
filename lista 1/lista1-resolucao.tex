@@ -200,7 +200,8 @@
 \maketitle
 
 Para essa lista, é considerada a seguinte arquitetura de uma rede neural
-\emph{feed-forward}:
+\emph{feed-forward}:\footnote{Documento disponível no repositório do
+  autor: \url{https://github.com/cesar-galvao/Topicos-1---Redes-neurais}}
 
 \begin{figure}[H]
 
@@ -368,8 +369,6 @@ onde \(m\) é o número de observações.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# VERIFICAR A CONTA AQUI NO FINAL E PASSAR PARA MATRICIAL}
-
 \NormalTok{J.Loss }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dados, theta, target)\{}
   
   \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.data.frame}\NormalTok{(dados) }\SpecialCharTok{|} \SpecialCharTok{!}\NormalTok{tibble}\SpecialCharTok{::}\FunctionTok{is\_tibble}\NormalTok{(dados))\{}
@@ -608,22 +607,25 @@ Primeiramente, implementamos o gradiente encontrado em (\ref{102}):
 
 ~
 
-É apresentado a seguir o resultado da função aplicada sobre o banco de
-treinamento, quando \(\theta = (0.1, \dots , 0.1)\):
+É apresentado na Tabela~\ref{tbl-gradienteaplicacao} a seguir o
+resultado da função aplicada sobre o banco de treinamento, quando
+\(\theta = (0.1, \dots , 0.1)\):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{grad\_item\_d }\OtherTok{\textless{}{-}} \FunctionTok{gradiente}\NormalTok{(dados\_train[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], theta, dados\_train}\SpecialCharTok{$}\NormalTok{y)}\SpecialCharTok{$}\NormalTok{grad}
-
-\NormalTok{grad\_item\_d }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{reframe}\NormalTok{(}\AttributeTok{Componente =} \FunctionTok{c}\NormalTok{(}\StringTok{"w1"}\NormalTok{, }\StringTok{"w2"}\NormalTok{, }\StringTok{"w3"}\NormalTok{, }\StringTok{"w4"}\NormalTok{, }\StringTok{"w5"}\NormalTok{, }\StringTok{"w6"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{, }\StringTok{"b3"}\NormalTok{),}
-         \AttributeTok{Derivada =}\NormalTok{ value) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
+~
+
 \begin{longtable}[]{@{}lr@{}}
+
+\caption{\label{tbl-gradienteaplicacao}Valores do gradiente para
+\(\boldsymbol{\theta} = (0.1, \dots , 0.1)\)}
+
+\tabularnewline
+
 \toprule\noalign{}
 Componente & Derivada \\
 \midrule\noalign{}
@@ -639,6 +641,7 @@ w6 & -22.3246918 \\
 b1 & -1.0732662 \\
 b2 & -1.0732662 \\
 b3 & -43.4113383 \\
+
 \end{longtable}
 
 \subsection{Item e}\label{item-e}
@@ -652,10 +655,8 @@ também o vetor de pesos estimado e comente o resultado.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Para a \emph{backpropagation} foi implementada a função a seguir que
-funciona em um de dois modos: por número de iterações ou por critério de
-aceitação. Neste caso, deve ser fornecido um limiar do valor da função
-de custo para que o algoritmo pare.
+A \emph{backpropagation} foi implementada na função a seguir, que exige
+como hiperparâmetros a taxa de aprendizagem e a quantidade de épocas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -852,7 +853,7 @@ custo para o banco de treinamento e validação.}
 \subsection{Item g}\label{item-g}
 
 Calcule os valores previstos \((\hat{y}_i)\) e os resíduos
-\((y_i − \hat{y}_i)\) da rede no conjunto de teste e represente-os
+\((y_i - \hat{y}_i)\) da rede no conjunto de teste e represente-os
 graficamente em função de \(x_1\) e \(x_2\). Dica: tome como base o
 código usado para a visualização da superfície
 \((E(Y |X_1, X_2), X_1, X_2)\). Altere o gradiente de cores e, se
@@ -888,7 +889,8 @@ viesado ou menos acurado?
     \AttributeTok{high=}\StringTok{"black"}\NormalTok{,}
     \AttributeTok{name=}\StringTok{"Resíduos"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_1$"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_2$"}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{0}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{))}
 
 \CommentTok{\#gráfico da esperança}
 \NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
@@ -905,16 +907,17 @@ viesado ou menos acurado?
   \AttributeTok{high=}\StringTok{"black"}\NormalTok{,}
   \AttributeTok{name=}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$E(Y|X\_1, X\_2)$"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_1$"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_2$"}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{0}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
-
-~
 
 O gráfico dos resíduos utilizando o gradiente implementado e o gráfico
 da esperança são apresentados a seguir. Interessantemente, o resíduo
 parece ser parece ser maior em regiões em que a esperança
-\(E(Y |X_1, X_2)\) é maior e menor onde a esperança é menor.
+\(E(Y |X_1, X_2)\) é maior e menor onde a esperança é menor. A região de
+resíduos próximos a zero é uma região intermediária que margeia o
+senóide.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -944,15 +947,15 @@ de teste. Interprete o resultado.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 No gráfico abaixo é possível observar que os valores de \(\hat{y}\)
-tendem a se concentrar nas extremidades, parece haver uma sobreposição
+tendem a se concentrar nas extremidades e parece haver uma sobreposição
 de comportamentos na transição entre os valores extremos do valor
 esperado.
 
 Enquanto parece haver uma grande dispersão em toda a região observada,
 os valores entre os extremos de \(\hat{y}\) parecem ter menor variância
 e estão mais concentrados em torno do valor esperado --- apesar de haver
-pontos bem distantes. Pode-se dizer que o modelo é mais viesado para
-valores extremos de \(\hat{y}\).
+pontos bem distantes. Além disso, fica evidente a maior variância para
+para valores extremos de \(\hat{y}\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -976,11 +979,12 @@ valores extremos de \(\hat{y}\).
 
 \centering{
 
-\captionsetup{labelsep=none}\includegraphics{lista1-resolucao_files/figure-pdf/fig-esperado-observado-1.pdf}
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-esperadoobservado-1.pdf}
 
 }
 
-\caption{\label{fig-esperado-observado}}
+\caption{\label{fig-esperadoobservado}Valor observado em função do valor
+esperado gerado pela rede neural.}
 
 \end{figure}%
 
@@ -1024,8 +1028,6 @@ para as amostras de tamanho 1 a 300:
 \end{Highlighting}
 \end{Shaded}
 
-~
-
 O gráfico do valor de \(w_1\) calculado em função do tamanho da amostra
 é exibido a seguir. Como é de se esperar, o valor de \(w_1\) tende a se
 aproximar do valor obtido no item d) à medida que o tamanho da amostra
@@ -1055,42 +1057,72 @@ aumenta.
 
 \centering{
 
-\captionsetup{labelsep=none}\includegraphics{lista1-resolucao_files/figure-pdf/fig-gradientek-1.pdf}
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-gradientek-1.pdf}
 
 }
 
-\caption{\label{fig-gradientek}}
+\caption{\label{fig-gradientek}Valor do gradiente
+\(\frac{\partial J}{\partial w_1}\) em função do tamanho da amostra.}
 
 \end{figure}%
 
 ~
 
+Nota-se do gráfico na Figura~\ref{fig-gradientek} que o valor de \(w_1\)
+tende a se aproximar do valor obtido no item d) à medida que o tamanho
+da amostra aumenta. Ao mesmo tempo, o resultado do benchmark exposto na
+Tabela~\ref{tbl-microbenchmark} sugere um tempo muito menor para o
+cálculo do gradiente com amostras menores. Se com uma amostra de tamanho
+300 o tempo médio de execução tem uma diferença de duas ordens de
+grandeza em relação à amostra de tamanho 100.000 e o resultado para o
+gradiente é muito próximo, uma possibilidade para acelerar ainda mais a
+execução do item e) seria realizar o cálculo do gradiente em pacotes
+(\emph{batches}).
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ microbenchmark}\SpecialCharTok{::}\FunctionTok{microbenchmark}\NormalTok{(}
+\NormalTok{microbenchmark}\SpecialCharTok{::}\FunctionTok{microbenchmark}\NormalTok{(}
   \AttributeTok{k\_300 =} \FunctionTok{k\_w1}\NormalTok{(dados, theta, }\DecValTok{300}\NormalTok{),}
   \AttributeTok{k\_100000 =} \FunctionTok{k\_w1}\NormalTok{(dados, theta, }\DecValTok{100000}\NormalTok{),}
   \AttributeTok{times =} \DecValTok{100}
-\NormalTok{) }
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{neval) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-~
+\begin{longtable}[]{@{}lrrrrrr@{}}
 
-Como esses resultados podem ser usados para acelerar a execução do item
-e)?
+\caption{\label{tbl-microbenchmark}Resultados do microbenchmark para o
+cálculo do gradiente com k = 300 e k = 100.000.}
+
+\tabularnewline
+
+\toprule\noalign{}
+expr & min & lq & mean & median & uq & max \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+k\_300 & 300.42 & 335.80 & 2506.44 & 468.45 & 605.81 & 184091.3 \\
+k\_100000 & 24486.86 & 32429.66 & 44916.49 & 33818.33 & 36363.58 &
+226434.2 \\
+
+\end{longtable}
+
+~
 
 \subsection{Item j}\label{item-j}
 
 Ajuste sobre o conjunto de treinamento um modelo linear normal (modelo
-linear 1)
-
-\[
+linear 1) \[
 Y_i = N \left(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma \right)
-\] usando a função \texttt{lm} do pacote \texttt{R} (ou outra
-equivalente). Em seguida, inclua na lista de covariáveis termos
-quadráticos e de interação linear. Isso é, assuma que no modelo linear
-2,
+\]
+
+usando a função \texttt{lm} do pacote \texttt{R} (ou outra equivalente).
+Em seguida, inclua na lista de covariáveis termos quadráticos e de
+interação linear. Isso é, assuma que no modelo linear 2,
 
 \[
 E(Y|x_1, x_2) = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + \beta_3 x_1^2 + \beta_4 x_2^2 + \beta_5 x_1 x_2.
@@ -1115,24 +1147,19 @@ Os modelos lineares são ajustados a seguir:
   \FunctionTok{anova}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{pull}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Mean Sq}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{min}\NormalTok{()}
+
+\NormalTok{MSErn }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(back\_validacao}\SpecialCharTok{$}\NormalTok{loss\_history)}
 \end{Highlighting}
 \end{Shaded}
 
 As perdas quadráticas são expostas na tabela a seguir:
 
-\phantomsection\label{tbl-MSE}
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{tibble}\NormalTok{(}
-  \AttributeTok{Modelo =} \FunctionTok{c}\NormalTok{(}\StringTok{"Rede Neural"}\NormalTok{, }\StringTok{"Modelo Linear 1"}\NormalTok{, }\StringTok{"Modelo Linear 2"}\NormalTok{),}
-  \AttributeTok{MSE =} \FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(back\_validacao}\SpecialCharTok{$}\NormalTok{loss\_history), MSE1, MSE2)}
-\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{MSE =} \FunctionTok{round}\NormalTok{(MSE, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{longtable}[]{@{}lr@{}}
+
+\caption{\label{tbl-MSE}Perdas quadráticas dos modelos ajustados.}
+
+\tabularnewline
+
 \toprule\noalign{}
 Modelo & MSE \\
 \midrule\noalign{}
@@ -1142,9 +1169,8 @@ Modelo & MSE \\
 Rede Neural & 144.15 \\
 Modelo Linear 1 & 138.71 \\
 Modelo Linear 2 & 94.76 \\
-\end{longtable}
 
-~
+\end{longtable}
 
 Pautado exclusivamente pelas perdas quadráticas, o modelo que deveria
 ser escolhido deveria ser o Modelo Linear 2, que inclui interações e
@@ -1161,30 +1187,21 @@ uma unidade da covariável \(x_1\)?
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Para o Modelo 1, o incremento no valor esperado da variável resposta em
-função de \(x_1\) é representado apenas por \(\beta_1\). Para o Modelo
-2, o incremento unitário no valor esperado da variável resposta é
-representado por
-\(\frac{d \hat{y}}{d \, x_1} = \beta_1 + 2\beta_3x_1 + \beta_5x_2\).
-Para a rede neural, o incremento unitário no valor esperado da variável
-resposta é representado pelos pesos de \(\boldsymbol{\theta}\)
-associados a \(x_1\), ou seja, \(w_1\) e \(w_2\).
+Temos como variação no valor esperado da variável resposta em função do
+incremento unitário de \(x_1\) as expressões e valores a seguir:
 
-Temos portanto, como variação no valor esperado da variável resposta em
-função do incremento unitário de \(x_1\):
+\textbf{Modelo 1}
 
-o efeito de x1 na rede neural é a soma dos pesos w1 e w2? e como faz no
-modelo 2?
+\(\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =\) 1.2 ~
 
-\begin{itemize}
-\tightlist
-\item
-  Modelo 1: 1.2031906
-\item
-  Modelo 2: 1.1912685 + 1.4082196\(x_1\) + -2.09555 \(x_2\)
-\item
-  Rede Neural: -3.3916996
-\end{itemize}
+\textbf{Modelo 2}
+
+\(\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 + 2\hat{\beta}_3 \, x_1 + \hat{\beta}_5 x_2 =\)
+1.19 + 1.4\(x_1\) + -2.09555 \(x_2\) ~
+
+\textbf{Rede Neural}
+
+\(\frac{\partial \, \hat{y}_i}{\partial \, x_{1i}} = w_5 \, \frac{\partial}{\partial x_{1i}} h_{1i} + w_6\, \frac{\partial}{\partial x_{1i}} h_{2i} = w_5w_1 \, \frac{e^{-a_{1i}}}{(1+e^{a_{1i}})^2} + w_6w_2 \, \frac{e^{-a_{2i}}}{(1+e^{a_{2i}})^2}\)
 
 \subsection{Item l}\label{item-l}
 
@@ -1192,22 +1209,182 @@ Novamente, para cada um dos 3 modelos em estudo, calcule o percentual de
 vezes que o intervalo de confiança de 95\% (para uma nova observação!)
 capturou o valor de \(y_i\) . Considere apenas os dados do conjunto de
 teste. No caso da rede neural, assuma que, aproximadamente,
-\(\frac{y_i - \hat{y}_i}{\hat{\sigma}} ∼ N (0, 1)\), onde
+\(\frac{y_i - \hat{y}_i}{\hat{\sigma}} \sim N (0, 1)\), onde
 \(\hat{\sigma}\) representa a raiz do erro quadrático médio da rede.
 Comente os resultados. Dica: para os modelos lineares, use a função
 \texttt{predict(mod,\ interval="prediction")}.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsubsection{Item m}\label{item-m}
+Utilizamos os modelos gerados com a base de treinamento para fazer a
+avaliação sobre os dados de teste.
 
-Para o modelo linear 1, faça um gráfico de disperção entre \(x_1\) e
-\(x_2\) , onde cada ponto corresponde a uma observação do conjunto de
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# modelo 1}
+\NormalTok{predictm1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(x1m1, }\AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{, }\AttributeTok{newdata =}\NormalTok{ dados\_test) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.matrix}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+
+\NormalTok{withinm1 }\OtherTok{\textless{}{-}}\NormalTok{ (dados\_test}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textgreater{}=}\NormalTok{ predictm1[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textless{}=}\NormalTok{ predictm1[,}\DecValTok{3}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mean}\NormalTok{()}
+
+\CommentTok{\# modelo 2}
+\NormalTok{predictm2 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(x1m2, }\AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ dados\_test) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.matrix}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+
+\NormalTok{withinm2 }\OtherTok{\textless{}{-}}\NormalTok{ (dados\_test}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textgreater{}=}\NormalTok{ predictm2[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textless{}=}\NormalTok{ predictm2[,}\DecValTok{3}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mean}\NormalTok{()}
+
+\CommentTok{\# rede neural}
+\NormalTok{tabela\_withinrn }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{yhat =} \FunctionTok{ffwd}\NormalTok{(dados\_test[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat,}
+  \AttributeTok{sigma =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{min}\NormalTok{(back\_validacao}\SpecialCharTok{$}\NormalTok{loss\_history)),}
+  \AttributeTok{y =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{y,}
+  \AttributeTok{std\_y =}\NormalTok{ (y}\SpecialCharTok{{-}}\NormalTok{yhat)}\SpecialCharTok{/}\NormalTok{sigma}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{lower =}\NormalTok{ yhat }\SpecialCharTok{{-}} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{sigma,}
+    \AttributeTok{upper =}\NormalTok{ yhat }\SpecialCharTok{+} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{sigma,}
+    \AttributeTok{within =}\NormalTok{ (y }\SpecialCharTok{\textgreater{}=}\NormalTok{ lower }\SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{\textless{}=}\NormalTok{ upper)}
+\NormalTok{  )  }
+
+\NormalTok{withinrn }\OtherTok{\textless{}{-}}\NormalTok{ tabela\_withinrn}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(within) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+As proporções dos valores de \(y_i\) que foram capturados pelos
+intervalos de confiança gerados são exibidos na
+Tabela~\ref{tbl-intervalos-confianca} a seguir. Enquanto o Modelo 2
+obteve o menor MSE, a proporção dos valores reais capturados pelo
+intervalo de confiança foi a menor entre os três modelos. Em comparação,
+a rede neural apresentou o maior MSE, mas uma proporção de captura muito
+similar ao Modelo Linear 1.
+
+\begin{longtable}[]{@{}lrr@{}}
+
+\caption{\label{tbl-intervalos-confianca}Proporção de valores de \(y_i\)
+capturados pelos intervalos de confiança de 95\%.}
+
+\tabularnewline
+
+\toprule\noalign{}
+Modelo & Proporção & MSE \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Modelo Linear 1 & 0.96 & 138.71 \\
+Modelo Linear 2 & 0.74 & 94.76 \\
+Rede Neural & 0.94 & 144.15 \\
+
+\end{longtable}
+
+\subsection{Item m}\label{item-m}
+
+Para o modelo linear 1, faça um gráfico de dispersão entre \(x_1\) e
+\(x_2\) onde cada ponto corresponde a uma observação do conjunto de
 teste. Identifique os pontos que estavam contidos nos respectivos
-intervalos e confianças utiliizando a cor verde. Para os demais pontos,
+intervalos de confiança utilizando a cor verde. Para os demais pontos,
 use vermelho. Comente o resultado.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+A seguir é construído o gráfico de dispersão conforme a instrução. Além
+disso, o gráfico da esperança condicional de \(Y\) em função de \(X_1\)
+e \(X_2\) é apresentado para comparação. Interessantemente os pontos
+contidos nos intervalos de confiança parecem estar mais concentrados nas
+regiões de maior valor da esperança condicional. No entanto, há pontos
+no terceiro quadrante, que possuem baixos valores na esperança
+condicional, que também não foram capturados --- esse padrão não se
+repete em outros setores do gráfico. O padrão de não-captura (dentro do
+domínio de \(X_1\) e \(X_2\) que estamos considerando) aparenta ser de
+baixos valores de \(X_1\) com valoires extremos de \(X_2\) altos valores
+de \(X_1\) dentro de um intervalo entre -1 e -2 para \(X_2\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabela }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(predictm1) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  rlang}\SpecialCharTok{::}\FunctionTok{set\_names}\NormalTok{(}\StringTok{"yhat"}\NormalTok{,}\StringTok{"lower"}\NormalTok{, }\StringTok{"upper"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{y,}
+         \AttributeTok{within =}\NormalTok{ (y }\SpecialCharTok{\textgreater{}=}\NormalTok{ lower }\SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{\textless{}=}\NormalTok{ upper),}
+         \AttributeTok{x1 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x1.obs,}
+         \AttributeTok{x2 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x2.obs)}
+  
+\NormalTok{plot\_regressao }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tabela, }\FunctionTok{aes}\NormalTok{(x1, x2, }\AttributeTok{color =}\NormalTok{ within))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.09}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_1$"}\NormalTok{), }\AttributeTok{y =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_2$"}\NormalTok{), }\AttributeTok{color =} \StringTok{"Dentro do IC"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.border =} \FunctionTok{element\_blank}\NormalTok{(), }\CommentTok{\# Remove all panel borders}
+    \AttributeTok{axis.line =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# Add axis lines}
+    \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# X axis ticks}
+    \AttributeTok{axis.ticks.y =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# Y axis ticks}
+    \AttributeTok{axis.ticks.length =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.05}\NormalTok{, }\StringTok{"cm"}\NormalTok{), }\CommentTok{\# Control tick length}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{0}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{plot\_grid}\NormalTok{(plot\_regressao, plot\_esperanca, }\AttributeTok{ncol=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-intervaloconfianca-1.pdf}
+
+}
+
+\caption{\label{fig-intervaloconfianca}Pontos contidos nos intervalos de
+confiança de 95\% para o Modelo Linear 1.}
+
+\end{figure}%
+
+~
+
+Para comparação, é feito o mesmo gráfico para os intervalos de confiança
+da rede neural. Em comparação ao caso anterior, há um padrão que se
+assemelha ao gráfico da esperança condicional. Parte do vale no senóide
+não é capturado, especificamente os próximos e pertencentes ao terceiro
+quadrante, assim como valores de alta esperança no quarto quadrante.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabela\_withinrn }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{x1 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x1.obs,}
+         \AttributeTok{x2 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x2.obs) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x1, x2, }\AttributeTok{color =}\NormalTok{ within))}\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.12}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_1$"}\NormalTok{), }\AttributeTok{y =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_2$"}\NormalTok{), }\AttributeTok{color =} \StringTok{"Dentro do IC"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.border =} \FunctionTok{element\_blank}\NormalTok{(), }\CommentTok{\# Remove all panel borders}
+    \AttributeTok{axis.line =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# Add axis lines}
+    \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# X axis ticks}
+    \AttributeTok{axis.ticks.y =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#474747"}\NormalTok{), }\CommentTok{\# Y axis ticks}
+    \AttributeTok{axis.ticks.length =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.05}\NormalTok{, }\StringTok{"cm"}\NormalTok{), }\CommentTok{\# Control tick length}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{0}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{),}
+    \AttributeTok{aspect.ratio =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-intervaloconfiancarede-1.pdf}
+
+}
+
+\caption{\label{fig-intervaloconfiancarede}Pontos contidos nos
+intervalos de confiança de 95\% para a Rede Neural.}
+
+\end{figure}%
 
 \section{Lições aprendidas}\label{liuxe7uxf5es-aprendidas}
 
@@ -1233,6 +1410,10 @@ O tempo de processamento foi reduzido de 10 minutos a 5s usando contas
 matriciais. No entanto, tive muitos problemas na hora de converter o
 código. Uma revisão bem detalhada teve que ser feita para identificar
 pequenos problemas de matrizes transpostas.
+
+Para os gráficos, poderia ter sido mais econômico em termos de linhas de
+código se tivesse montado uma função para toda a configuração do
+\texttt{theme()}.
 
 
 
