@@ -425,7 +425,7 @@ gradiente <- function(dados, theta, target){
 }
 ```
 
-\ 
+ 
 
 É apresentado na @tbl-gradienteaplicacao a seguir o resultado da função aplicada sobre o banco de treinamento, quando $\theta = (0.1, \dots , 0.1)$:
 
@@ -436,7 +436,7 @@ gradiente <- function(dados, theta, target){
 grad_item_d <- gradiente(dados_train[,c(1,2)], theta, dados_train$y)$grad
 ```
 
-\ 
+ 
 
 ```{r}
 #| label: tbl-gradienteaplicacao
@@ -449,7 +449,6 @@ grad_item_d %>%
          Derivada = value) %>%
   knitr::kable()
 ```
-
 
 ## Item e
 
@@ -601,6 +600,12 @@ A seguir é construido o gráfico. Novamemente, trata-se de duas bases de dados 
 
 Apesar disso, é possível notar que, na base de treinamento, o algoritmo escapa do mínimo identificado ligeiramente mais rápido, possivelmente devido à maior disponibilidade de dados. Neste caso, a base de treinamento é oito vezes maior que a base de validação.
 
+Algumas coisas são notáveis:
+
+-   A partir de uma certá época, ambas as curvas ficam com forma de serrote. Isso provavelmente indica que o tamanho do *learning rate* deveria ser adaptado a partir desses pontos para capturar apenas descidas na perda;
+-   O comportamento do serrote nas curvas é espelhado: a "amplitude de onda" aumenta com a época no banco de dados de treinamento e diminui no banco de dados de validação;
+-   A perda média no conjunto de treinamento passa a aumentar enquanto a perda média no conjunto de validação passa a diminuir.
+
 ```{r}
 #| label: fig-historico-custo-treinamento-validacao
 #| fig-cap: Histórico de custo para o banco de treinamento e validação.
@@ -648,10 +653,8 @@ Calcule os valores previstos $(\hat{y}_i)$ e os resíduos $(y_i - \hat{y}_i)$ da
 #| label: predicao-residuos
 #| depends: gradiente
 
-#calcular o back propagation e usar o melhor theta do conjunto de teste
-
-# usamos o conjunto de teste
-theta <- back_validacao$theta
+# usamos o melhor theta encontrado
+theta <- back_validacao$best_theta
 
 resultados_gradiente <- gradiente(dados_test[,c(1,2)], theta, dados_test$y)
 
@@ -693,7 +696,6 @@ plot_esperanca <- ggplot(dados.grid, aes(x=x1, y=x2)) +
   theme(legend.position = "bottom",
         axis.title.y = element_text(angle = 0, vjust = 0.5))
 ```
-
 
 O gráfico dos resíduos utilizando o gradiente implementado e o gráfico da esperança são apresentados a seguir. Interessantemente, o resíduo parece ser parece ser maior em regiões em que a esperança $E(Y |X_1, X_2)$ é maior e menor onde a esperança é menor. A região de resíduos próximos a zero é uma região intermediária que margeia o senóide.
 
@@ -766,8 +768,6 @@ valores_w1 <- tibble(
 
 ```
 
-
-
 O gráfico do valor de $w_1$ calculado em função do tamanho da amostra é exibido a seguir. Como é de se esperar, o valor de $w_1$ tende a se aproximar do valor obtido no item d) à medida que o tamanho da amostra aumenta.
 
 ```{r}
@@ -792,7 +792,7 @@ ggplot(valores_w1, aes(k, w1, group = 1))+
 
 ```
 
-\ 
+ 
 
 Nota-se do gráfico na @fig-gradientek que o valor de $w_1$ tende a se aproximar do valor obtido no item d) à medida que o tamanho da amostra aumenta. Ao mesmo tempo, o resultado do benchmark exposto na @tbl-microbenchmark sugere um tempo muito menor para o cálculo do gradiente com amostras menores. Se com uma amostra de tamanho 300 o tempo médio de execução tem uma diferença de duas ordens de grandeza em relação à amostra de tamanho 100.000 e o resultado para o gradiente é muito próximo, uma possibilidade para acelerar ainda mais a execução do item e) seria realizar o cálculo do gradiente em pacotes (*batches*).
 
@@ -810,14 +810,15 @@ microbenchmark::microbenchmark(
   knitr::kable(digits = 2)
 ```
 
-\ 
+ 
 
 ## Item j
 
-Ajuste sobre o conjunto de treinamento um modelo linear normal (modelo linear 1)
+Ajuste sobre o conjunto de treinamento um modelo linear normal (modelo linear 1) 
+
 $$
 Y_i = N \left(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma \right)
-$$ 
+$$
 
 usando a função `lm` do pacote `R` (ou outra equivalente). Em seguida, inclua na lista de covariáveis termos quadráticos e de interação linear. Isso é, assuma que no modelo linear 2,
 
@@ -862,7 +863,6 @@ tibble(
   knitr::kable()
 ```
 
-
 Pautado exclusivamente pelas perdas quadráticas, o modelo que deveria ser escolhido deveria ser o Modelo Linear 2, que inclui interações e termos quadráticos. No entanto, é importante considerar também a capacidade de generalização do modelo. Uma avaliação desses modelos considerando outras bases de dados para teste seria necessária para determinar o melhor desempenho.
 
 ## Item k
@@ -884,19 +884,70 @@ x2rn <- back_validacao$best_theta$W1
 
 Temos como variação no valor esperado da variável resposta em função do incremento unitário de $x_1$ as expressões e valores a seguir:
 
-**Modelo 1**  
-
-$\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =$  `r (x1m1 %>% summary() %>% tidy())$estimate[2] %>% round(2)`
 \ 
 
-**Modelo 2** 
+**Modelo 1**
+
+$\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =$ `r (x1m1 %>% summary() %>% tidy())$estimate[2] %>% round(2)`
+
+\ 
+
+Neste modelo a variação é facilmente interpretável, visto que o incremento unitário em $x_1$ é simplesmente de $\hat{\beta}_1$ em $y_i$.
+
+ 
+
+**Modelo 2**
 
 $\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 + 2\hat{\beta}_3 \, x_1 + \hat{\beta}_5 x_2 =$ `r (x1m2 %>% summary() %>% tidy())$estimate[2] %>% round(2)` + `r 2*(x1m2 %>% summary() %>% tidy())$estimate[4] %>% round(2)`$x_1$ + `r (x1m2 %>% summary() %>% tidy())$estimate[6]` $x_2$
+
 \ 
 
-**Rede Neural** 
+O Modelo 2 exige uma interpretação mais complexa. O efeito de um incremento unitário em $x_1$ não só varia de de acordo com $\hat{\beta}_1$, mas com o próprio valor de $x_1$. Além disso, por haver interação entre variáveis, a interpretação exigiria um valor fixo de $x_2$.
+
+ 
+
+**Rede Neural**
 
 $\frac{\partial \, \hat{y}_i}{\partial \, x_{1i}} = w_5 \, \frac{\partial}{\partial x_{1i}} h_{1i} + w_6\, \frac{\partial}{\partial x_{1i}} h_{2i} = w_5w_1 \, \frac{e^{-a_{1i}}}{(1+e^{a_{1i}})^2} + w_6w_2 \, \frac{e^{-a_{2i}}}{(1+e^{a_{2i}})^2}$
+
+\ 
+
+A interpretação deste modelo fica muito mais complexa a partir da expressão algébrica anterior. Mantendo $x_2$ constante em sua média, i.e. zero, o comportamento de $\hat{y}$ em função de $x_1$ está representado na @fig-efeitox1 a seguir[^3]:
+
+\ 
+
+[^3]: Foi utilizado o melhor $\boldsymbol{\theta}$ encontrado utilizando o banco de dados de validação.
+
+```{r}
+#| label: tabela-efeito-x1
+
+efeitos_x1 <- tibble(
+  x1 = seq(-3, 3, length.out = 100),
+  x2 = rep(0, 100)) %>% 
+  mutate(yhat = ffwd(., back_validacao$best_theta)$yhat)
+```
+
+
+
+```{r}
+#| label: fig-efeitox1
+#| fig-cap: Efeito de um incremento unitário em $x_1$ no valor esperado da variável resposta.
+#| echo: false
+
+ggplot(efeitos_x1, aes(x = x1, y = yhat))+
+  geom_line()+
+  scale_x_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3))+
+  theme_bw()+
+  labs(x = TeX("$x_1$"), y = TeX("$\\hat{y}$"))+
+  theme(panel.border = element_blank(), # Remove all panel borders
+    axis.line = element_line(color = "#474747"), # Add axis lines
+    axis.ticks.x = element_line(color = "#474747"), # X axis ticks
+    axis.ticks.y = element_line(color = "#474747"), # Y axis ticks
+    axis.ticks.length = unit(0.05, "cm"), # Control tick length
+    legend.position = "bottom",
+    axis.title.y = element_text(angle = 0, vjust = 0.5))
+```
+
 
 ## Item l
 
@@ -927,14 +978,14 @@ withinm2 <- (dados_test$y >= predictm2[,2] & dados_test$y <= predictm2[,3]) %>%
 
 # rede neural
 tabela_withinrn <- tibble(
-  yhat = ffwd(dados_test[,c(1,2)], back_validacao$best_theta)$yhat,
-  sigma = sqrt(min(back_validacao$loss_history)),
+  yhat = ffwd(dados_test[,c(1,2)], back_validacao$best_theta)$yhat, #usamos o melhor theta da validação
+  sigma = sqrt(min(back_validacao$loss_history)), #usamos o minimo da loss da validação
   y = dados_test$y,
   std_y = (y-yhat)/sigma
 ) %>%
   mutate(
-    lower = yhat - 1.96*sigma,
-    upper = yhat + 1.96*sigma,
+    lower = yhat - qnorm(0.975)*sigma,
+    upper = yhat + qnorm(0.025)*sigma,
     within = (y >= lower & y <= upper)
   )  
 
@@ -966,7 +1017,6 @@ Para o modelo linear 1, faça um gráfico de dispersão entre $x_1$ e $x_2$ onde
 
 A seguir é construído o gráfico de dispersão conforme a instrução. Além disso, o gráfico da esperança condicional de $Y$ em função de $X_1$ e $X_2$ é apresentado para comparação. Interessantemente os pontos contidos nos intervalos de confiança parecem estar mais concentrados nas regiões de maior valor da esperança condicional. No entanto, há pontos no terceiro quadrante, que possuem baixos valores na esperança condicional, que também não foram capturados --- esse padrão não se repete em outros setores do gráfico. O padrão de não-captura (dentro do domínio de $X_1$ e $X_2$ que estamos considerando) aparenta ser de baixos valores de $X_1$ com valoires extremos de $X_2$ altos valores de $X_1$ dentro de um intervalo entre -1 e -2 para $X_2$.
 
-
 ```{r}
 #| label: fig-intervaloconfianca
 #| fig-cap: Pontos contidos nos intervalos de confiança de 95% para o Modelo Linear 1.
@@ -994,7 +1044,7 @@ plot_regressao <- ggplot(tabela, aes(x1, x2, color = within))+
 plot_grid(plot_regressao, plot_esperanca, ncol=2)
 ```
 
-\ 
+ 
 
 Para comparação, é feito o mesmo gráfico para os intervalos de confiança da rede neural. Em comparação ao caso anterior, há um padrão que se assemelha ao gráfico da esperança condicional. Parte do vale no senóide não é capturado, especificamente os próximos e pertencentes ao terceiro quadrante, assim como valores de alta esperança no quarto quadrante.
 
@@ -1019,9 +1069,6 @@ tabela_withinrn %>%
     axis.title.y = element_text(angle = 0, vjust = 0.5),
     aspect.ratio = 1)
 ```
-
-
-
 
 # Lições aprendidas
 

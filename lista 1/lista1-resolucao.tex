@@ -617,8 +617,6 @@ resultado da função aplicada sobre o banco de treinamento, quando
 \end{Highlighting}
 \end{Shaded}
 
-~
-
 \begin{longtable}[]{@{}lr@{}}
 
 \caption{\label{tbl-gradienteaplicacao}Valores do gradiente para
@@ -805,6 +803,24 @@ escapa do mínimo identificado ligeiramente mais rápido, possivelmente
 devido à maior disponibilidade de dados. Neste caso, a base de
 treinamento é oito vezes maior que a base de validação.
 
+Algumas coisas são notáveis:
+
+\begin{itemize}
+\tightlist
+\item
+  A partir de uma certá época, ambas as curvas ficam com forma de
+  serrote. Isso provavelmente indica que o tamanho do \emph{learning
+  rate} deveria ser adaptado a partir desses pontos para capturar apenas
+  descidas na perda;
+\item
+  O comportamento do serrote nas curvas é espelhado: a ``amplitude de
+  onda'' aumenta com a época no banco de dados de treinamento e diminui
+  no banco de dados de validação;
+\item
+  A perda média no conjunto de treinamento passa a aumentar enquanto a
+  perda média no conjunto de validação passa a diminuir.
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# hiperparametros e base de treinamento}
@@ -865,10 +881,8 @@ viesado ou menos acurado?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#calcular o back propagation e usar o melhor theta do conjunto de teste}
-
-\CommentTok{\# usamos o conjunto de teste}
-\NormalTok{theta }\OtherTok{\textless{}{-}}\NormalTok{ back\_validacao}\SpecialCharTok{$}\NormalTok{theta}
+\CommentTok{\# usamos o melhor theta encontrado}
+\NormalTok{theta }\OtherTok{\textless{}{-}}\NormalTok{ back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta}
 
 \NormalTok{resultados\_gradiente }\OtherTok{\textless{}{-}} \FunctionTok{gradiente}\NormalTok{(dados\_test[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], theta, dados\_test}\SpecialCharTok{$}\NormalTok{y)}
 
@@ -1105,9 +1119,9 @@ expr & min & lq & mean & median & uq & max \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-k\_300 & 300.42 & 335.80 & 2506.44 & 468.45 & 605.81 & 184091.3 \\
-k\_100000 & 24486.86 & 32429.66 & 44916.49 & 33818.33 & 36363.58 &
-226434.2 \\
+k\_300 & 311.71 & 379.32 & 532.90 & 483.84 & 553.18 & 2387.61 \\
+k\_100000 & 31309.33 & 33860.28 & 49903.98 & 36067.48 & 39781.81 &
+235359.62 \\
 
 \end{longtable}
 
@@ -1116,7 +1130,9 @@ k\_100000 & 24486.86 & 32429.66 & 44916.49 & 33818.33 & 36363.58 &
 \subsection{Item j}\label{item-j}
 
 Ajuste sobre o conjunto de treinamento um modelo linear normal (modelo
-linear 1) \[
+linear 1)
+
+\[
 Y_i = N \left(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma \right)
 \]
 
@@ -1190,18 +1206,71 @@ uma unidade da covariável \(x_1\)?
 Temos como variação no valor esperado da variável resposta em função do
 incremento unitário de \(x_1\) as expressões e valores a seguir:
 
+~
+
 \textbf{Modelo 1}
 
-\(\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =\) 1.2 ~
+\(\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 =\) 1.2
+
+~
+
+Neste modelo a variação é facilmente interpretável, visto que o
+incremento unitário em \(x_1\) é simplesmente de \(\hat{\beta}_1\) em
+\(y_i\).
+
+~
 
 \textbf{Modelo 2}
 
 \(\frac{d \, \hat{y}}{d \, x_1} = \hat{\beta}_1 + 2\hat{\beta}_3 \, x_1 + \hat{\beta}_5 x_2 =\)
-1.19 + 1.4\(x_1\) + -2.09555 \(x_2\) ~
+1.19 + 1.4\(x_1\) + -2.09555 \(x_2\)
+
+~
+
+O Modelo 2 exige uma interpretação mais complexa. O efeito de um
+incremento unitário em \(x_1\) não só varia de de acordo com
+\(\hat{\beta}_1\), mas com o próprio valor de \(x_1\). Além disso, por
+haver interação entre variáveis, a interpretação exigiria um valor fixo
+de \(x_2\).
+
+~
 
 \textbf{Rede Neural}
 
 \(\frac{\partial \, \hat{y}_i}{\partial \, x_{1i}} = w_5 \, \frac{\partial}{\partial x_{1i}} h_{1i} + w_6\, \frac{\partial}{\partial x_{1i}} h_{2i} = w_5w_1 \, \frac{e^{-a_{1i}}}{(1+e^{a_{1i}})^2} + w_6w_2 \, \frac{e^{-a_{2i}}}{(1+e^{a_{2i}})^2}\)
+
+~
+
+A interpretação deste modelo fica muito mais complexa a partir da
+expressão algébrica anterior. Mantendo \(x_2\) constante em sua média,
+i.e.~zero, o comportamento de \(\hat{y}\) em função de \(x_1\) está
+representado na Figura~\ref{fig-efeitox1} a seguir\footnote{Foi
+  utilizado o melhor \(\boldsymbol{\theta}\) encontrado utilizando o
+  banco de dados de validação.}:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{efeitos\_x1 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{x1 =} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{),}
+  \AttributeTok{x2 =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yhat =} \FunctionTok{ffwd}\NormalTok{(., back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{lista1-resolucao_files/figure-pdf/fig-efeitox1-1.pdf}
+
+}
+
+\caption{\label{fig-efeitox1}Efeito de um incremento unitário em \(x_1\)
+no valor esperado da variável resposta.}
+
+\end{figure}%
 
 \subsection{Item l}\label{item-l}
 
@@ -1239,14 +1308,14 @@ avaliação sobre os dados de teste.
 
 \CommentTok{\# rede neural}
 \NormalTok{tabela\_withinrn }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
-  \AttributeTok{yhat =} \FunctionTok{ffwd}\NormalTok{(dados\_test[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat,}
-  \AttributeTok{sigma =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{min}\NormalTok{(back\_validacao}\SpecialCharTok{$}\NormalTok{loss\_history)),}
+  \AttributeTok{yhat =} \FunctionTok{ffwd}\NormalTok{(dados\_test[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat, }\CommentTok{\#usamos o melhor theta da validação}
+  \AttributeTok{sigma =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{min}\NormalTok{(back\_validacao}\SpecialCharTok{$}\NormalTok{loss\_history)), }\CommentTok{\#usamos o minimo da loss da validação}
   \AttributeTok{y =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{y,}
   \AttributeTok{std\_y =}\NormalTok{ (y}\SpecialCharTok{{-}}\NormalTok{yhat)}\SpecialCharTok{/}\NormalTok{sigma}
 \NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}
-    \AttributeTok{lower =}\NormalTok{ yhat }\SpecialCharTok{{-}} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{sigma,}
-    \AttributeTok{upper =}\NormalTok{ yhat }\SpecialCharTok{+} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{sigma,}
+    \AttributeTok{lower =}\NormalTok{ yhat }\SpecialCharTok{{-}} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sigma,}
+    \AttributeTok{upper =}\NormalTok{ yhat }\SpecialCharTok{+} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.025}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sigma,}
     \AttributeTok{within =}\NormalTok{ (y }\SpecialCharTok{\textgreater{}=}\NormalTok{ lower }\SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{\textless{}=}\NormalTok{ upper)}
 \NormalTok{  )  }
 
@@ -1279,7 +1348,7 @@ Modelo & Proporção & MSE \\
 \endlastfoot
 Modelo Linear 1 & 0.96 & 138.71 \\
 Modelo Linear 2 & 0.74 & 94.76 \\
-Rede Neural & 0.94 & 144.15 \\
+Rede Neural & 0.00 & 144.15 \\
 
 \end{longtable}
 
