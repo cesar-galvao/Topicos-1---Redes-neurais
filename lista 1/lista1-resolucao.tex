@@ -1119,9 +1119,9 @@ expr & min & lq & mean & median & uq & max \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-k\_300 & 311.71 & 379.32 & 532.90 & 483.84 & 553.18 & 2387.61 \\
-k\_100000 & 31309.33 & 33860.28 & 49903.98 & 36067.48 & 39781.81 &
-235359.62 \\
+k\_300 & 313.02 & 359.42 & 559.38 & 491.33 & 596.24 & 3180.93 \\
+k\_100000 & 22943.89 & 25642.51 & 44393.75 & 28847.56 & 43370.99 &
+266250.38 \\
 
 \end{longtable}
 
@@ -1242,11 +1242,11 @@ de \(x_2\).
 ~
 
 A interpretação deste modelo fica muito mais complexa a partir da
-expressão algébrica anterior. Mantendo \(x_2\) constante em sua média,
-i.e.~zero, o comportamento de \(\hat{y}\) em função de \(x_1\) está
-representado na Figura~\ref{fig-efeitox1} a seguir\footnote{Foi
-  utilizado o melhor \(\boldsymbol{\theta}\) encontrado utilizando o
-  banco de dados de validação.}:
+expressão algébrica anterior. Mantendo \(x_2\) constante, o
+comportamento de \(\hat{y}\) em função de \(x_1\) está representado na
+Figura~\ref{fig-efeitox1} a seguir\footnote{Foi utilizado o melhor
+  \(\boldsymbol{\theta}\) encontrado utilizando o banco de dados de
+  validação.}:
 
 ~
 
@@ -1254,8 +1254,24 @@ representado na Figura~\ref{fig-efeitox1} a seguir\footnote{Foi
 \begin{Highlighting}[]
 \NormalTok{efeitos\_x1 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
   \AttributeTok{x1 =} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{),}
-  \AttributeTok{x2 =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yhat =} \FunctionTok{ffwd}\NormalTok{(., back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat)}
+  \AttributeTok{x20 =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{),}
+  \AttributeTok{x215 =} \FunctionTok{rep}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\DecValTok{100}\NormalTok{),}
+  \AttributeTok{x2\_15 =} \FunctionTok{rep}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.5}\NormalTok{, }\DecValTok{100}\NormalTok{),}
+  \AttributeTok{x23 =} \FunctionTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yhat0 =} \FunctionTok{ffwd}\NormalTok{(.[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat,}
+         \AttributeTok{yhat15 =} \FunctionTok{ffwd}\NormalTok{(.[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat,}
+         \AttributeTok{yhat15\_ =} \FunctionTok{ffwd}\NormalTok{(.[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat,}
+         \AttributeTok{yhat3 =} \FunctionTok{ffwd}\NormalTok{(.[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{)], back\_validacao}\SpecialCharTok{$}\NormalTok{best\_theta)}\SpecialCharTok{$}\NormalTok{yhat) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(x1, yhat0, yhat15, yhat15\_, yhat3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \SpecialCharTok{{-}}\NormalTok{x1, }\AttributeTok{names\_to =} \StringTok{"x2"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"yhat"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{x2 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    x2 }\SpecialCharTok{==} \StringTok{"yhat0"} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}0\textquotesingle{}}\NormalTok{,}
+\NormalTok{    x2 }\SpecialCharTok{==} \StringTok{"yhat15"} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}1.5\textquotesingle{}}\NormalTok{,}
+\NormalTok{    x2 }\SpecialCharTok{==} \StringTok{"yhat15\_"} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}{-}1.5\textquotesingle{}}\NormalTok{,}
+\NormalTok{    x2 }\SpecialCharTok{==} \StringTok{"yhat3"} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}3\textquotesingle{}}
+\NormalTok{    )}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 

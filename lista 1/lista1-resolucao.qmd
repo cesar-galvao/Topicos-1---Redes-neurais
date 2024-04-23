@@ -912,7 +912,7 @@ $\frac{\partial \, \hat{y}_i}{\partial \, x_{1i}} = w_5 \, \frac{\partial}{\part
 
 \ 
 
-A interpretação deste modelo fica muito mais complexa a partir da expressão algébrica anterior. Mantendo $x_2$ constante em sua média, i.e. zero, o comportamento de $\hat{y}$ em função de $x_1$ está representado na @fig-efeitox1 a seguir[^3]:
+A interpretação deste modelo fica muito mais complexa a partir da expressão algébrica anterior. Mantendo $x_2$ constante, o comportamento de $\hat{y}$ em função de $x_1$ está representado na @fig-efeitox1 a seguir[^3]:
 
 \ 
 
@@ -923,8 +923,24 @@ A interpretação deste modelo fica muito mais complexa a partir da expressão a
 
 efeitos_x1 <- tibble(
   x1 = seq(-3, 3, length.out = 100),
-  x2 = rep(0, 100)) %>% 
-  mutate(yhat = ffwd(., back_validacao$best_theta)$yhat)
+  x20 = rep(0, 100),
+  x215 = rep(1.5, 100),
+  x2_15 = rep(-1.5, 100),
+  x23 = rep(3, 100)
+  ) %>% 
+  mutate(yhat0 = ffwd(.[,c(1,2)], back_validacao$best_theta)$yhat,
+         yhat15 = ffwd(.[,c(1,3)], back_validacao$best_theta)$yhat,
+         yhat15_ = ffwd(.[,c(1,4)], back_validacao$best_theta)$yhat,
+         yhat3 = ffwd(.[,c(1,5)], back_validacao$best_theta)$yhat) %>%
+  select(x1, yhat0, yhat15, yhat15_, yhat3) %>%
+  pivot_longer(cols = -x1, names_to = "x2", values_to = "yhat") %>%
+  mutate(x2 = case_when(
+    x2 == "yhat0" ~ '0',
+    x2 == "yhat15" ~ '1.5',
+    x2 == "yhat15_" ~ '-1.5',
+    x2 == "yhat3" ~ '3'
+    )
+  )
 ```
 
 
@@ -934,17 +950,17 @@ efeitos_x1 <- tibble(
 #| fig-cap: Efeito de um incremento unitário em $x_1$ no valor esperado da variável resposta.
 #| echo: false
 
-ggplot(efeitos_x1, aes(x = x1, y = yhat))+
+ggplot(efeitos_x1, aes(x = x1, y = yhat, color = x2, group = x2))+
   geom_line()+
   scale_x_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3))+
   theme_bw()+
-  labs(x = TeX("$x_1$"), y = TeX("$\\hat{y}$"))+
+  labs(x = TeX("$x_1$"), y = TeX("$\\hat{y}$"), color = TeX("Valor de $x_2$"))+
   theme(panel.border = element_blank(), # Remove all panel borders
     axis.line = element_line(color = "#474747"), # Add axis lines
     axis.ticks.x = element_line(color = "#474747"), # X axis ticks
     axis.ticks.y = element_line(color = "#474747"), # Y axis ticks
     axis.ticks.length = unit(0.05, "cm"), # Control tick length
-    legend.position = "bottom",
+    legend.position = "right",
     axis.title.y = element_text(angle = 0, vjust = 0.5))
 ```
 
