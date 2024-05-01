@@ -1119,9 +1119,9 @@ expr & min & lq & mean & median & uq & max \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-k\_300 & 313.02 & 359.42 & 559.38 & 491.33 & 596.24 & 3180.93 \\
-k\_100000 & 22943.89 & 25642.51 & 44393.75 & 28847.56 & 43370.99 &
-266250.38 \\
+k\_300 & 301.11 & 324.46 & 438.63 & 428.70 & 482.75 & 1077.63 \\
+k\_100000 & 22478.30 & 23236.24 & 34778.43 & 25198.98 & 27250.06 &
+189120.91 \\
 
 \end{longtable}
 
@@ -1331,7 +1331,7 @@ avaliação sobre os dados de teste.
 \NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}
     \AttributeTok{lower =}\NormalTok{ yhat }\SpecialCharTok{{-}} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sigma,}
-    \AttributeTok{upper =}\NormalTok{ yhat }\SpecialCharTok{+} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.025}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sigma,}
+    \AttributeTok{upper =}\NormalTok{ yhat }\SpecialCharTok{+} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sigma,}
     \AttributeTok{within =}\NormalTok{ (y }\SpecialCharTok{\textgreater{}=}\NormalTok{ lower }\SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{\textless{}=}\NormalTok{ upper)}
 \NormalTok{  )  }
 
@@ -1364,7 +1364,7 @@ Modelo & Proporção & MSE \\
 \endlastfoot
 Modelo Linear 1 & 0.96 & 138.71 \\
 Modelo Linear 2 & 0.74 & 94.76 \\
-Rede Neural & 0.00 & 144.15 \\
+Rede Neural & 0.94 & 144.15 \\
 
 \end{longtable}
 
@@ -1401,7 +1401,7 @@ de \(X_1\) dentro de um intervalo entre -1 e -2 para \(X_2\).
   
 \NormalTok{plot\_regressao }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tabela, }\FunctionTok{aes}\NormalTok{(x1, x2, }\AttributeTok{color =}\NormalTok{ within))}\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.09}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_1$"}\NormalTok{), }\AttributeTok{y =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_2$"}\NormalTok{), }\AttributeTok{color =} \StringTok{"Dentro do IC"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.border =} \FunctionTok{element\_blank}\NormalTok{(), }\CommentTok{\# Remove all panel borders}
@@ -1443,7 +1443,7 @@ quadrante, assim como valores de alta esperança no quarto quadrante.
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{x1 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x1.obs,}
          \AttributeTok{x2 =}\NormalTok{ dados\_test}\SpecialCharTok{$}\NormalTok{x2.obs) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x1, x2, }\AttributeTok{color =}\NormalTok{ within))}\SpecialCharTok{+}
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.12}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_1$"}\NormalTok{), }\AttributeTok{y =} \FunctionTok{TeX}\NormalTok{(}\StringTok{"$x\_2$"}\NormalTok{), }\AttributeTok{color =} \StringTok{"Dentro do IC"}\NormalTok{)}\SpecialCharTok{+}

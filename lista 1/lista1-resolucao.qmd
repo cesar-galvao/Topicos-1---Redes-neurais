@@ -1001,7 +1001,7 @@ tabela_withinrn <- tibble(
 ) %>%
   mutate(
     lower = yhat - qnorm(0.975)*sigma,
-    upper = yhat + qnorm(0.025)*sigma,
+    upper = yhat + qnorm(0.975)*sigma,
     within = (y >= lower & y <= upper)
   )  
 
@@ -1046,7 +1046,7 @@ tabela <- as_tibble(predictm1) %>%
   
 plot_regressao <- ggplot(tabela, aes(x1, x2, color = within))+
   geom_point(alpha = 0.09)+
-  scale_color_manual(values = c("green", "red")) +
+  scale_color_manual(values = c("red","green")) +
   theme_bw()+
   labs(x = TeX("$x_1$"), y = TeX("$x_2$"), color = "Dentro do IC")+
   theme(panel.border = element_blank(), # Remove all panel borders
@@ -1072,7 +1072,7 @@ tabela_withinrn %>%
   mutate(x1 = dados_test$x1.obs,
          x2 = dados_test$x2.obs) %>%
   ggplot(aes(x1, x2, color = within))+
-  scale_color_manual(values = c("green", "red")) +
+  scale_color_manual(values = c("red","green")) +
   geom_point(alpha = 0.12)+
   theme_bw()+
   labs(x = TeX("$x_1$"), y = TeX("$x_2$"), color = "Dentro do IC")+
