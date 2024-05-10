@@ -1,0 +1,102 @@
+### Ajustando os parâmetros via Keras ----
+
+install.packages("pacman")
+pacman::p_load("tidyverse", "keras", "tensorflow", "reticulate", "rsample")
+py_discover_config()
+
+
+### Configurações iniciais ----
+set.seed(42)
+n.pontos <- 10000
+
+### Dados normais com relações lineares ----
+
+# Criando o conjunto de dados
+beta.true <- c(1, .5, 2)
+dados <- tibble(inter = 1,
+                x1    = rnorm(n.pontos),
+                x2    = rnorm(n.pontos)) %>%
+  mutate(mu = as.matrix(.) %*% beta.true,
+         y  = rnorm(n.pontos, mu, sd = .1))
+
+# Repartindo o conjunto de dados
+dados_split <- initial_validation_split(dados)
+dados_treino <- training(dados_split)
+dados_val <- validation(dados_split)
+dados_test <- testing(dados_split)
+
+
+### Ajustando os parâmetros via pacotes lm e Keras  ----
+
+# Ajustando o modelo linear
+mod.lm <- lm(y ~ x1 + x2, data = dados_treino)
+
+# Ajustando o modelo via Keras
+mod <- keras_model_sequential()
+mod %>%
+  layer_dense(input_shape = 2,
+              units       = 1)
+mod %>%
+  compile(optimizer = optimizer_sgd(lr=0.01),
+          loss      = "mse")
+mod %>%
+  fit(x               = as.matrix(select(dados_treino, c("x1", "x2"))),
+      y               = pull(dados_treino, y),
+      validation_data = list(as.matrix(select(dados_val, c("x1", "x2"))),
+                             pull(dados_val, y)))
+
+
+# Estimativas dos parâmetros
+mod %>% get_weights()
+mod.lm
+
+# Previsões pontuais
+pred.lm <- predict(mod.lm, select(dados_test, c("x1", "x2")))
+
+pred.keras <- mod %>%
+  predict(as.matrix(select(dados_test, c("x1", "x2"))))
+
+# Erro quadrático médio
+sqrt(mean((pull(dados_test, y) - pred.keras)^2))
+sqrt(mean((pull(dados_test, y) - pred.lm)^2))
+
+
+
+# Definindo a matriz de treinamento (design)
+x_treino <- x %>%
+  select(x1, x2) %>%
+  as.matrix()
+
+# Definindo a função de perda
+lv_loss <- function(y_true, y_pred) {
+  # K <- backend()
+  cost <- y_true/y_pred + k_log(y_pred)
+  k_sum(cost, axis = -1) * 1000
+}
+
+# Iniciando um modelo sequencial
+mod <- keras_model_sequential()
+
+# Adicionamos as camadas
+mod %>%
+  layer_dense(units              = 1,
+              activation         = "exponential",
+              use_bias           = T,
+              input_shape        = 2)
+
+# Definindo a função de perda e o otimizador
+mod %>%
+  compile(optimizer = optimizer_sgd(lr=.00001),
+          loss      = lv_loss,
+          )
+
+# Ajustando a rede usando o Keras
+mod %>%
+  fit(x               = x_treino,
+      y               = y,
+      batch_size      = nrow(x_treino),
+      epochs          = 500
+      )
+
+mod %>%
+  get_weights()

@@ -2,3 +2,4173 @@
 "0","#| echo: false"
 "0",""
 "0","pacman::p_load(tidyverse, NeuralNetTools,latex2exp, cowplot, microbenchmark, tidymodels)"
+"2","Installing package into ‘/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4’
+(as ‘lib’ is unspecified)
+"
+"2","also installing the dependencies ‘plyr’, ‘reshape2’
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/plyr_1.8.9.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 401488 bytes (392 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 392 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/reshape2_1.4.4.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 37307 bytes (36 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 36 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/NeuralNetTools_1.5.3.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 151151 bytes (147 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 147 KB
+
+"
+"2","* installing *source* package ‘plyr’ ...
+"
+"2","** package ‘plyr’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"2","using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c RcppExports.cpp -o RcppExports.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c loop_apply.c -o loop_apply.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c split-numeric.cpp -o split-numeric.o
+"
+"1","g++ -std=gnu++17 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o plyr.so RcppExports.o loop_apply.o split-numeric.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-plyr/00new/plyr/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (plyr)
+"
+"2","* installing *source* package ‘reshape2’ ...
+"
+"2","** package ‘reshape2’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c RcppExports.cpp -o RcppExports.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c melt.cpp -o melt.o
+"
+"1","g++ -std=gnu++17 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o reshape2.so RcppExports.o melt.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-reshape2/00new/reshape2/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (reshape2)
+"
+"2","* installing *source* package ‘NeuralNetTools’ ...
+"
+"2","** package ‘NeuralNetTools’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (NeuralNetTools)
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘/tmp/RtmpizzmXN/downloaded_packages’"
+"2",""
+"2","
+"
+"2","
+NeuralNetTools installed
+"
+"2","Installing package into ‘/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4’
+(as ‘lib’ is unspecified)
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/latex2exp_0.9.6.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 1498904 bytes (1.4 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 1.4 MB
+
+"
+"2","* installing *source* package ‘latex2exp’ ...
+"
+"2","** package ‘latex2exp’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (latex2exp)
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘/tmp/RtmpizzmXN/downloaded_packages’"
+"2",""
+"2","
+"
+"2","
+latex2exp installed
+"
+"2","Installing package into ‘/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4’
+(as ‘lib’ is unspecified)
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/cowplot_1.1.3.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 1350286 bytes (1.3 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 1.3 MB
+
+"
+"2","* installing *source* package ‘cowplot’ ...
+"
+"2","** package ‘cowplot’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (cowplot)
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘/tmp/RtmpizzmXN/downloaded_packages’"
+"2",""
+"2","
+"
+"2","
+cowplot installed
+"
+"2","Installing package into ‘/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4’
+(as ‘lib’ is unspecified)
+"
+"2","also installing the dependencies ‘shape’, ‘progressr’, ‘SQUAREM’, ‘diagram’, ‘lava’, ‘prodlim’, ‘warp’, ‘future.apply’, ‘iterators’, ‘listenv’, ‘parallelly’, ‘lhs’, ‘DiceDesign’, ‘patchwork’, ‘globals’, ‘clock’, ‘gower’, ‘ipred’, ‘furrr’, ‘slider’, ‘doFuture’, ‘foreach’, ‘future’, ‘GPfit’, ‘modelenv’, ‘dials’, ‘hardhat’, ‘infer’, ‘modeldata’, ‘parsnip’, ‘recipes’, ‘rsample’, ‘tune’, ‘workflows’, ‘workflowsets’, ‘yardstick’
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/shape_1.4.6.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 646412 bytes (631 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 631 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/progressr_0.14.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 211320 bytes (206 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 206 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/SQUAREM_2021.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 241534 bytes (235 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 235 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/diagram_1.6.5.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 536872 bytes (524 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 524 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/lava_1.8.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 1169695 bytes (1.1 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 1.1 MB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/prodlim_2023.08.28.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 128725 bytes (125 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 125 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/warp_0.2.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 52719 bytes (51 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 51 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/future.apply_1.11.2.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 63881 bytes (62 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 62 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/iterators_1.0.14.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 300266 bytes (293 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 293 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/listenv_0.9.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 36600 bytes (35 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 35 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/parallelly_1.37.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 146066 bytes (142 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 142 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/lhs_1.1.6.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 253446 bytes (247 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 247 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/DiceDesign_1.10.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 144180 bytes (140 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 140 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/patchwork_1.2.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 3289733 bytes (3.1 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 3.1 MB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/globals_0.16.3.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 37475 bytes (36 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 36 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/clock_0.7.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 558040 bytes (544 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 544 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/gower_1.0.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 187590 bytes (183 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 183 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/ipred_0.9-14.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 176371 bytes (172 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 172 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/furrr_0.3.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 907668 bytes (886 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 886 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/slider_0.3.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 141508 bytes (138 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 138 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/doFuture_1.0.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 59782 bytes (58 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 58 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/foreach_1.5.2.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 89758 bytes (87 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 87 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/future_1.33.2.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 355510 bytes (347 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 347 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/GPfit_1.0-8.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 23892 bytes (23 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 23 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/modelenv_0.1.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 23511 bytes (22 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 22 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/dials_1.2.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 138389 bytes (135 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 135 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/hardhat_1.3.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 610829 bytes (596 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 596 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/infer_1.0.7.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 3106070 bytes (3.0 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 3.0 MB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/modeldata_1.3.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 5104281 bytes (4.9 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 4.9 MB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/parsnip_1.2.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 974958 bytes (952 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 952 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/recipes_1.0.10.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 827351 bytes (807 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 807 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/rsample_1.2.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 328564 bytes (320 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 320 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/tune_1.2.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 822865 bytes (803 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 803 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/workflows_1.1.4.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 94715 bytes (92 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 92 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/workflowsets_1.1.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 321214 bytes (313 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 313 KB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/yardstick_1.3.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 1566206 bytes (1.5 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 1.5 MB
+
+"
+"2","trying URL 'https://cloud.r-project.org/src/contrib/tidymodels_1.2.0.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 50750 bytes (49 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 49 KB
+
+"
+"2","* installing *source* package ‘shape’ ...
+"
+"2","** package ‘shape’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (shape)
+"
+"2","* installing *source* package ‘progressr’ ...
+"
+"2","** package ‘progressr’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (progressr)
+"
+"2","* installing *source* package ‘SQUAREM’ ...
+"
+"2","** package ‘SQUAREM’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (SQUAREM)
+"
+"2","* installing *source* package ‘warp’ ...
+"
+"2","** package ‘warp’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c boundary.c -o boundary.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c change.c -o change.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c coercion.c -o coercion.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c date.c -o date.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c distance.c -o distance.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c divmod.c -o divmod.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c get.c -o get.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c timezone.c -o timezone.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c utils.c -o utils.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o warp.so boundary.o change.o coercion.o date.o distance.o divmod.o get.o init.o timezone.o utils.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-warp/00new/warp/libs
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (warp)
+"
+"2","* installing *source* package ‘iterators’ ...
+"
+"2","** package ‘iterators’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (iterators)
+"
+"2","* installing *source* package ‘listenv’ ...
+"
+"2","** package ‘listenv’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (listenv)
+"
+"2","* installing *source* package ‘parallelly’ ...
+"
+"2","** package ‘parallelly’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c 000.init.c -o 000.init.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c test_tcp_port.c -o test_tcp_port.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o parallelly.so 000.init.o test_tcp_port.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-parallelly/00new/parallelly/libs
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (parallelly)
+"
+"2","* installing *source* package ‘lhs’ ...
+"
+"2","** package ‘lhs’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"2","using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"2","using C++11
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c COrthogonalArray.cpp -o COrthogonalArray.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c GaloisField.cpp -o GaloisField.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c ak3.cpp -o ak3.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c akconst.cpp -o akconst.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c akn.cpp -o akn.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c construct.cpp -o construct.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c geneticLHS.cpp -o geneticLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c improvedLHS.cpp -o improvedLHS.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c lhs_r.cpp -o lhs_r.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c lhs_r_utilities.cpp -o lhs_r_utilities.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c maximinLHS.cpp -o maximinLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c oa.cpp -o oa.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c oaLHS.cpp -o oaLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c oa_r.cpp -o oa_r.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c oa_r_utils.cpp -o oa_r_utils.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c oalhs_r.cpp -o oalhs_r.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c optSeededLHS.cpp -o optSeededLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c optimumLHS.cpp -o optimumLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c primes.cpp -o primes.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c randomLHS.cpp -o randomLHS.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c runif.cpp -o runif.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c rutils.cpp -o rutils.o
+"
+"1","g++ -std=gnu++11 -I""/usr/share/R/include"" -DNDEBUG -DRCOMPILE -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c utilityLHS.cpp -o utilityLHS.o
+"
+"1","g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o lhs.so COrthogonalArray.o GaloisField.o ak3.o akconst.o akn.o construct.o geneticLHS.o improvedLHS.o init.o lhs_r.o lhs_r_utilities.o maximinLHS.o oa.o oaLHS.o oa_r.o oa_r_utils.o oalhs_r.o optSeededLHS.o optimumLHS.o primes.o randomLHS.o runif.o rutils.o utilityLHS.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-lhs/00new/lhs/libs
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (lhs)
+"
+"2","* installing *source* package ‘DiceDesign’ ...
+"
+"2","** package ‘DiceDesign’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c C_StraussDesign.c -o C_StraussDesign.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c C_rss.c -o C_rss.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c DiceDesign_init.c -o DiceDesign_init.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o DiceDesign.so C_StraussDesign.o C_rss.o DiceDesign_init.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-DiceDesign/00new/DiceDesign/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (DiceDesign)
+"
+"2","* installing *source* package ‘patchwork’ ...
+"
+"2","** package ‘patchwork’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (patchwork)
+"
+"2","* installing *source* package ‘globals’ ...
+"
+"2","** package ‘globals’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (globals)
+"
+"2","* installing *source* package ‘clock’ ...
+"
+"2","** package ‘clock’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c cpp11.cpp -o cpp11.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c duration.cpp -o duration.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c enums.cpp -o enums.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c format.cpp -o format.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c gregorian-year-day.cpp -o gregorian-year-day.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c gregorian-year-month-day.cpp -o gregorian-year-month-day.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c gregorian-year-month-weekday.cpp -o gregorian-year-month-weekday.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c iso-year-week-day.cpp -o iso-year-week-day.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c limits.cpp -o limits.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c naive-time.cpp -o naive-time.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c quarterly-year-quarter-day.cpp -o quarterly-year-quarter-day.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c rcrd.cpp -o rcrd.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c sys-time.cpp -o sys-time.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c time-point.cpp -o time-point.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c utils.cpp -o utils.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c week-year-week-day.cpp -o week-year-week-day.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c weekday.cpp -o weekday.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c zone.cpp -o zone.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/cpp11/include' -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/tzdb/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c zoned-time.cpp -o zoned-time.o
+"
+"1","g++ -std=gnu++17 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o clock.so cpp11.o duration.o enums.o format.o gregorian-year-day.o gregorian-year-month-day.o gregorian-year-month-weekday.o iso-year-week-day.o limits.o naive-time.o quarterly-year-quarter-day.o rcrd.o sys-time.o time-point.o utils.o week-year-week-day.o weekday.o zone.o zoned-time.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-clock/00new/clock/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (clock)
+"
+"2","* installing *source* package ‘gower’ ...
+"
+"2","** package ‘gower’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG      -fopenmp -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c R_register_native.c -o R_register_native.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG      -fopenmp -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c gower.c -o gower.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o gower.so R_register_native.o gower.o -fopenmp -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-gower/00new/gower/libs
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (gower)
+"
+"2","* installing *source* package ‘modelenv’ ...
+"
+"2","** package ‘modelenv’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (modelenv)
+"
+"2","* installing *source* package ‘hardhat’ ...
+"
+"2","** package ‘hardhat’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (hardhat)
+"
+"2","* installing *source* package ‘modeldata’ ...
+"
+"2","** package ‘modeldata’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (modeldata)
+"
+"2","* installing *source* package ‘diagram’ ...
+"
+"2","** package ‘diagram’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (diagram)
+"
+"2","* installing *source* package ‘slider’ ...
+"
+"2","** package ‘slider’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"2","using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c block.c -o block.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c hop.c -o hop.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c index.c -o index.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c params.c -o params.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c segment-tree.c -o segment-tree.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c slide-period.c -o slide-period.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c slide.c -o slide.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c slider-vctrs-private.c -o slider-vctrs-private.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c slider-vctrs-public.c -o slider-vctrs-public.o
+"
+"1","g++ -std=gnu++17 -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -c summary-core-align.cpp -o summary-core-align.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c summary-index.c -o summary-index.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c summary-slide.c -o summary-slide.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/vctrs/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c utils.c -o utils.o
+"
+"1","g++ -std=gnu++17 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o slider.so block.o hop.o index.o init.o params.o segment-tree.o slide-period.o slide.o slider-vctrs-private.o slider-vctrs-public.o summary-core-align.o summary-index.o summary-slide.o utils.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-slider/00new/slider/libs
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (slider)
+"
+"2","* installing *source* package ‘foreach’ ...
+"
+"2","** package ‘foreach’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (foreach)
+"
+"2","* installing *source* package ‘future’ ...
+"
+"2","** package ‘future’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (future)
+"
+"2","* installing *source* package ‘GPfit’ ...
+"
+"2","** package ‘GPfit’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (GPfit)
+"
+"2","* installing *source* package ‘dials’ ...
+"
+"2","** package ‘dials’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (dials)
+"
+"2","* installing *source* package ‘infer’ ...
+"
+"2","** package ‘infer’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (infer)
+"
+"2","* installing *source* package ‘parsnip’ ...
+"
+"2","** package ‘parsnip’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (parsnip)
+"
+"2","* installing *source* package ‘yardstick’ ...
+"
+"2","** package ‘yardstick’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c mcc-multiclass.c -o mcc-multiclass.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o yardstick.so init.o mcc-multiclass.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-yardstick/00new/yardstick/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (yardstick)
+"
+"2","* installing *source* package ‘future.apply’ ...
+"
+"2","** package ‘future.apply’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (future.apply)
+"
+"2","* installing *source* package ‘furrr’ ...
+"
+"2","** package ‘furrr’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (furrr)
+"
+"2","* installing *source* package ‘workflows’ ...
+"
+"2","** package ‘workflows’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (workflows)
+"
+"2","* installing *source* package ‘lava’ ...
+"
+"2","** package ‘lava’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","** demo
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (lava)
+"
+"2","* installing *source* package ‘doFuture’ ...
+"
+"2","** package ‘doFuture’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (doFuture)
+"
+"2","* installing *source* package ‘rsample’ ...
+"
+"2","** package ‘rsample’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (rsample)
+"
+"2","* installing *source* package ‘prodlim’ ...
+"
+"2","** package ‘prodlim’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c GMLE.c -o GMLE.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c IntIndex.c -o IntIndex.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c icens_prodlim.c -o icens_prodlim.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c icens_prodlim_ml.c -o icens_prodlim_ml.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c iindex.c -o iindex.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c life_table.c -o life_table.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c loo.c -o loo.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c neighborhood.c -o neighborhood.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c predict.c -o predict.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c predict_individual_survival.c -o predict_individual_survival.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c prodlim.c -o prodlim.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c prodlim_clustersurv.c -o prodlim_clustersurv.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c prodlim_comprisk.c -o prodlim_comprisk.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c prodlim_multistates.c -o prodlim_multistates.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c prodlim_surv.c -o prodlim_surv.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c sindex.c -o sindex.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG  -I'/home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/Rcpp/include'     -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c summary_prodlim.c -o summary_prodlim.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o prodlim.so GMLE.o IntIndex.o icens_prodlim.o icens_prodlim_ml.o iindex.o init.o life_table.o loo.o neighborhood.o predict.o predict_individual_survival.o prodlim.o prodlim_clustersurv.o prodlim_comprisk.o prodlim_multistates.o prodlim_surv.o sindex.o summary_prodlim.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-prodlim/00new/prodlim/libs
+"
+"2","** R
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (prodlim)
+"
+"2","* installing *source* package ‘ipred’ ...
+"
+"2","** package ‘ipred’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** libs
+"
+"2","using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c SdiffKM.c -o SdiffKM.o
+"
+"1","gcc -I""/usr/share/R/include"" -DNDEBUG       -fpic  -g -O2 -ffile-prefix-map=/build/r-base-H8urij/r-base-4.4.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  -c init.c -o init.o
+"
+"1","gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o ipred.so SdiffKM.o init.o -L/usr/lib/R/lib -lR
+"
+"2","installing to /home/cesaragalvao/R/x86_64-pc-linux-gnu-library/4.4/00LOCK-ipred/00new/ipred/libs
+"
+"2","** R
+"
+"2","** data
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** checking absolute paths in shared objects and dynamic libraries
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (ipred)
+"
+"2","* installing *source* package ‘recipes’ ...
+"
+"2","** package ‘recipes’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (recipes)
+"
+"2","* installing *source* package ‘tune’ ...
+"
+"2","** package ‘tune’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (tune)
+"
+"2","* installing *source* package ‘workflowsets’ ...
+"
+"2","** package ‘workflowsets’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** data
+"
+"2","*** moving datasets to lazyload DB
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (workflowsets)
+"
+"2","* installing *source* package ‘tidymodels’ ...
+"
+"2","** package ‘tidymodels’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"2","** R
+"
+"2","** inst
+"
+"2","** byte-compile and prepare package for lazy loading
+"
+"2","** help
+"
+"2","*** installing help indices
+"
+"2","*** copying figures
+"
+"2","** building package indices
+"
+"2","** installing vignettes
+"
+"2","** testing if installed package can be loaded from temporary location
+"
+"2","** testing if installed package can be loaded from final location
+"
+"2","** testing if installed package keeps a record of temporary installation path
+"
+"2","* DONE (tidymodels)
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘/tmp/RtmpizzmXN/downloaded_packages’"
+"2",""
+"2","
+"
+"2","
+tidymodels installed
+"
