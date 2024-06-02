@@ -1,0 +1,12 @@
+---
+title: "Untitled"
+format: pdf
+---
+
+$$
+\begin{aligned}
+  \mathbf{W}_{.}^{\text{WSIR}} &= (1 - p) \mathbf{W}_{.}, \quad p = \text{drop-out rate} \\
+  \mathbf{A} &= \mathbf{b}_1 + \mathbf{W}_.^{\text{WSIR}} \mathbf{X} \\
+  \mathbf{\hat{y}} &= \mathbf{H} \mathbf{W}_2^{\text{WSIR}} + b_3
+\end{aligned}
+$$
