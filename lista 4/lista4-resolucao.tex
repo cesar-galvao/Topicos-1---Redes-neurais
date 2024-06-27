@@ -1,0 +1,780 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  a4paperpaper,
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \ifXeTeX
+    \usepackage{mathspec} % this also loads fontspec
+  \else
+    \usepackage{unicode-math} % this also loads fontspec
+  \fi
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=30mm,left=30mm,right=30mm,heightrounded]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Índice}
+\else
+  \newcommand\contentsname{Índice}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Lista de Figuras}
+\else
+  \newcommand\listfigurename{Lista de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Lista de Tabelas}
+\else
+  \newcommand\listtablename{Lista de Tabelas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabela}
+\else
+  \newcommand\tablename{Tabela}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listagem}
+\newcommand*\listoflistings{\listof{codelisting}{Lista de Listagens}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{portuguese}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Lista 4: Classificação de imagens.},
+  pdfauthor={César A. Galvão - 190011572; João Vitor Vasconcelos - 170126064},
+  pdflang={pt},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lista 4: Classificação de imagens.}
+\author{César A. Galvão - 190011572 \and João Vitor Vasconcelos -
+170126064}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Índice}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+~
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+~
+
+~
+
+~
+
+~
+
+Boa parte dos resultados dessa lista foram obtidos utilizando o apoio do
+ChatGPT. Na ausência, ou na dificuldade em achar, de fontes com
+instruções para exercícios similares, o exercício se tornou um
+aprendizado orientado por prompts do último modelo disponível. Buscou-se
+documentar todos os passos da resolução com o intuito de demonstrar que
+não foi feito apenas um processo de copiar e colar os resultados da
+plataforma, mas uma tentativa de conciliar seus resultados com as aulas,
+materiais disponíveis e, quando possível, a documentação do TensorFlow e
+Keras. O atendimento de monitoria também foi essencial para nos ajudar a
+explorar mais argumentos das funções e possíveis fontes de problemas na
+classificação do conjunto de teste.
+
+~
+
+Repositório do GitHub:
+\url{https://github.com/cesar-galvao/Topicos-1---Redes-neurais}
+
+Caderno no Colab:
+\url{https://colab.research.google.com/drive/13DnHbWgiF4bZfCUiU9F2Ejv2yDWCqxUB?usp=sharing}
+
+\newpage{}
+
+\section{Características dos dados}\label{caracteruxedsticas-dos-dados}
+
+A lista foi resolvida usando duas plataformas. A parte que diz respeito
+à estruturação e compreensão dos dados foi feita no RStudio, enquanto o
+treinamento da rede neural foi feito no Google Colab.
+
+Antes de iniciar a construção da rede neural, foi necessário entender
+como os dados precisariam estar estruturados para serem utilizados.
+Questões como a disposição dos arquivos, informações sobre os
+\emph{labels} das imagens, formato e dimensão das imagens, entre outras,
+foram levantadas. Isso é importante para que se possa construir um
+modelo que seja capaz de lidar com os dados de maneira eficiente.
+
+A seguir, os arquivos são transformados. A justificativa para isso é
+descrita a seguir.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(dplyr, magick)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# diretorios das imagens}
+\NormalTok{dir\_imagens }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"../lista 4/Teste/"}\NormalTok{)}
+
+\CommentTok{\# lista de arquivos .bmp}
+\NormalTok{bmp }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(dir\_imagens, }\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.BMP"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# transforma as imagens em png}
+\ControlFlowTok{for}\NormalTok{ (file }\ControlFlowTok{in}\NormalTok{ bmp) \{}
+\NormalTok{  img }\OtherTok{\textless{}{-}} \FunctionTok{image\_read}\NormalTok{(file)}
+  
+  \CommentTok{\# cria os paths para escrita}
+\NormalTok{  output\_file }\OtherTok{\textless{}{-}} \FunctionTok{file.path}\NormalTok{(dir\_imagens, }\FunctionTok{paste0}\NormalTok{(tools}\SpecialCharTok{::}\FunctionTok{file\_path\_sans\_ext}\NormalTok{(}\FunctionTok{basename}\NormalTok{(file)), }\StringTok{".png"}\NormalTok{))}
+  \CommentTok{\# Escreve imagem em png}
+  \FunctionTok{image\_write}\NormalTok{(img, }\AttributeTok{path =}\NormalTok{ output\_file, }\AttributeTok{format =} \StringTok{"png"}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\# exclui arquivos bmp}
+\FunctionTok{file.remove}\NormalTok{(bmp, }\AttributeTok{showWarnings =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{img }\OtherTok{\textless{}{-}} \FunctionTok{image\_read}\NormalTok{(}\StringTok{"../lista 4/Treino/F\_0015.png"}\NormalTok{)}
+
+\FunctionTok{image\_info}\NormalTok{(img)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrllrl@{}}
+\toprule\noalign{}
+format & width & height & colorspace & matte & filesize & density \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+PNG & 96 & 103 & Gray & TRUE & 6268 & 38x38 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.integer}\NormalTok{(}\FunctionTok{image\_data}\NormalTok{(img)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{dim}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 103  96   1
+\end{verbatim}
+
+Observa-se que:
+
+\begin{itemize}
+\tightlist
+\item
+  Há 740 imagens de digitais femininas e 3260 imagens de digitais
+  masculinas para treino;
+\item
+  Há 2000 imagens para teste;
+\item
+  As imagens estão em formato \texttt{bmp}, que é um formato de imagem
+  nativo do Windows. Optou-se por transformá-las em \texttt{png}, que é
+  um formato mais comum e que é suportado por mais plataformas;
+\item
+  As imagens em \texttt{png} possuem dimensão 96x103, com apenas um
+  canal em escala de cinza.
+\end{itemize}
+
+Quanto à atribuição dos labels de treino, o guia
+\href{https://tensorflow.rstudio.com/tutorials/keras/classification}{TensorFlow
+for R} foi consultado, porém não houve instruções claras. Para
+esclarecimento, foi consultado o ChatGPT, que indicou a utilização de
+uma arvore de arquivos para a organização dos dados. A seguinte
+estrutura foi sugerida, mas utilizada com adaptações, visto que a função
+utilizada inclui uma separação nativa dos dados para validação:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/path\_to\_dataset/}
+    \ExtensionTok{/train/}
+        \ExtensionTok{/class1/}
+            \ExtensionTok{img1.jpg}
+            \ExtensionTok{img2.jpg}
+            \ExtensionTok{...}
+        \ExtensionTok{/class2/}
+            \ExtensionTok{img1.jpg}
+            \ExtensionTok{img2.jpg}
+            \ExtensionTok{...}
+    \ExtensionTok{/validation/}
+        \ExtensionTok{/class1/}
+            \ExtensionTok{img1.jpg}
+            \ExtensionTok{img2.jpg}
+            \ExtensionTok{...}
+        \ExtensionTok{/class2/}
+            \ExtensionTok{img1.jpg}
+            \ExtensionTok{img2.jpg}
+            \ExtensionTok{...}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Dessa forma, os arquivos foram organizados da seguinte forma:
+
+\begin{itemize}
+\tightlist
+\item
+  Treino
+
+  \begin{itemize}
+  \tightlist
+  \item
+    male
+  \item
+    female
+  \end{itemize}
+\item
+  Teste
+\end{itemize}
+
+~
+
+\section{Ajuste do ambiente}\label{ajuste-do-ambiente}
+
+O ambiente do Colab foi ajustado com os seguintes pacotes e Runtime T4
+GPU, visando acelerar o treinamento da rede.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"keras"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(keras)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tensorflow"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(tensorflow)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"reticulate"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(reticulate)}
+
+\CommentTok{\# GPU}
+\NormalTok{tf}\SpecialCharTok{$}\NormalTok{config}\SpecialCharTok{$}\FunctionTok{list\_physical\_devices}\NormalTok{(}\StringTok{"GPU"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+\section{Pré-processamento}\label{pruxe9-processamento}
+
+De acordo com o a documentação do
+\href{https://cran.r-project.org/web/packages/keras/keras.pdf}{Keras}, o
+pré-processamento via \texttt{image\_data\_generator()} já não é mais
+adequado, sendo sugerida uma função mais nova. No entanto, não
+identificamos um fluxo de trabalho que utilize, conforme a documentação,
+a função \texttt{image\_dataset\_from\_directory()} e as demais camadas
+de pré-processamento\footnote{``\emph{image\_data\_generator is not
+  recommended for new code. Prefer loading images with
+  image\_dataset\_from\_directory and transforming the output TF Dataset
+  with preprocessing layers. For more information, see the tutorials for
+  loading images and augmenting images, as well as the preprocessing
+  layer guide}''.}.
+
+Dessa forma, optamos por utilizar a função antiga. Além disso, pedimos
+uma sugestão ao chatGPT de hiperparâmetros para o pré-processamento e
+\emph{data augmentation}, de forma que obtivemos o seguinte resultado:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Data augmentation sugerida}
+\NormalTok{datagen }\OtherTok{\textless{}{-}} \FunctionTok{image\_data\_generator}\NormalTok{(}
+  \AttributeTok{rescale =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{255}\NormalTok{,               }\CommentTok{\# Rescale pixel values}
+  \AttributeTok{validation\_split =} \FloatTok{0.3}\NormalTok{,        }\CommentTok{\# Split the data into training and validation}
+  \AttributeTok{rotation\_range =} \DecValTok{20}\NormalTok{,           }\CommentTok{\# Randomly rotate images by up to 20 degrees}
+  \AttributeTok{width\_shift\_range =} \FloatTok{0.2}\NormalTok{,       }\CommentTok{\# Randomly shift images horizontally by 20\% of the width}
+  \AttributeTok{height\_shift\_range =} \FloatTok{0.2}\NormalTok{,      }\CommentTok{\# Randomly shift images vertically by 20\% of the height}
+  \AttributeTok{shear\_range =} \FloatTok{0.2}\NormalTok{,             }\CommentTok{\# Randomly shear images}
+  \AttributeTok{zoom\_range =} \FloatTok{0.2}\NormalTok{,              }\CommentTok{\# Randomly zoom in and out}
+  \AttributeTok{horizontal\_flip =} \ConstantTok{TRUE}         \CommentTok{\# Randomly flip images horizontally}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Considerando que estamos tratando de imagens de digitais, algumas dessas
+sugestões fazem sentido, enquanto outras não. Os argumentos são
+discutidos individualmente a seguir:
+
+\begin{itemize}
+\tightlist
+\item
+  Reescalar os valores dos pixels para o intervalo {[}0, 1{]} faz
+  sentido. Imaginamos que isso possa reduzir um problema de escala;
+\item
+  Utilizaremos 30\% dos dados de treinamento para validação;
+\item
+  Rotacionar as imagens em até 20 graus faz sentido, visto que as
+  digitais podem estar em diferentes orientações no momento de captura
+  da imagem;
+\item
+  A rotação também aparenta fazer sentido, ja que pode existir variação
+  no momento de captura;
+\item
+  Alterações verticais e horizontais (artificialmente neste caso, para
+  \emph{data augmentation}) também fazem sentido como forma de
+  generalização de formatos de dedos;
+\item
+  A operação de sheer (distorção da imagem apenas no sentido horizontal)
+  não parece fazer sentido. Até poderia fazer sentido caso houvesse uma
+  distorção natural ou no processo de digitalização das imagens, mas
+  decidimos não incluir;
+\item
+  O zoom também faz sentido, já que podemos estar tratando de
+  generalização de pedaços das imagens;
+\item
+  Finalmente, a inversão horizontal também faz sentido, já que isso
+  possivelmente estaríamos tratando de imagens de mãos direitas e
+  esquerdas.
+\end{itemize}
+
+~
+
+Outros argumentos disponíveis não parecem fazer sentido de serem
+alterados. Por exemplo, não faria sentido suavizar a imagem com
+normalização \emph{feature} ou \emph{samplewise}, já que estamos
+tratando de imagens com contornos finos e isso possivelmente contribui
+para a classificação correta da imagem. Por outro lado,
+\texttt{fill\_mode} indica formas de preenchimento de pixels na
+fronteira. Para evitar que o comportamento na convolução seja dominado
+por \texttt{cval\ =\ 0} por padrão, selecionamos
+\texttt{fill\_mode\ =\ "nearest"}, que expande os valores dos pixels
+mais próximos.
+
+Além disso, depois de algumas tentativas de calibragem do modelo e
+classificação das imagens de teste com esses hiperparâmetros notamos que
+algumas configurações geravam resultados melhores com a mesma
+arquitetura de rede. O principal resultado era obter todas as
+classificações de uma única classe e suspeitamos que isso ocorria devido
+ao desbalanceamento da amostra, que foi arrumado utilizando pesos para
+as classes, cuja solução é apresentada no código de classificação. Junto
+a essa solução, os hiperparâmetros que apresentaram a melhor
+classificação foram os seguintes:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Data augmentation utilizada}
+\NormalTok{datagen }\OtherTok{\textless{}{-}} \FunctionTok{image\_data\_generator}\NormalTok{(}
+  \AttributeTok{validation\_split =} \FloatTok{0.3}\NormalTok{,}
+  \AttributeTok{rotation\_range =} \DecValTok{20}\NormalTok{,}
+  \AttributeTok{width\_shift\_range =} \FloatTok{0.2}\NormalTok{,}
+  \AttributeTok{height\_shift\_range =} \FloatTok{0.2}\NormalTok{,}
+  \AttributeTok{zoom\_range =} \FloatTok{0.2}\NormalTok{,}
+  \AttributeTok{horizontal\_flip =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+\section{Ajuste da rede neural}\label{ajuste-da-rede-neural}
+
+Definidas as configurações de pré-processamento, a rede neural foi
+ajustada novamente com sugestões do ChatGPT com algumas alterações. A
+implementação tem os seguintes passos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Carregamento de pacotes;
+\item
+  Definição do pré-processamento;
+\item
+  Definição do diretório de dados;
+\item
+  Definição dos conjuntos de treinamento e de validação;
+\item
+  Sequenciamento do modelo;
+\item
+  Compilação do modelo.
+\end{enumerate}
+
+O passo 3 foi definido conforme o código a seguir:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_dir }\OtherTok{\textless{}{-}} \StringTok{"/content/Treino"}
+\CommentTok{\# contem as pastas com labels de male e female}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+O passo 4 ocorreu como segue. A função recebe o diretório dos dados de
+treinamento (com as imagens de homens e mulheres em pastas distintas) e
+o objeto com as especificações de pré-processamento.
+\texttt{target\_size} é definido para o tamanho das imagens, de modo que
+não reverta para o padrão de 256x256 pixels, com cores em escala de
+cinza e um batch size de 32, por padrão. Como a classificação de fato é
+binária --- homens e mulheres --- faz sentido manter o argumento de
+\texttt{class\_mode}. O subset é indicado para utilizar aquele que foi
+indicado no pré-processamento. O argumento \texttt{shuffle} não foi
+alterado, utilizando \texttt{TRUE} como padrão e embaralhando as imagens
+para favorecer uma amostragem probabilística. O argumento
+\texttt{classes} foi incluido na mesma ordem de exibição das pastas no
+diretório de treino para atribuir classes identificáveis.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_generator }\OtherTok{\textless{}{-}} \FunctionTok{flow\_images\_from\_directory}\NormalTok{(}
+\NormalTok{  train\_dir,}
+  \AttributeTok{generator =}\NormalTok{ datagen,}
+  \AttributeTok{target\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{96}\NormalTok{, }\DecValTok{103}\NormalTok{),}
+  \AttributeTok{color\_mode =} \StringTok{"grayscale"}\NormalTok{,}
+  \AttributeTok{batch\_size =} \DecValTok{32}\NormalTok{,}
+  \AttributeTok{class\_mode =} \StringTok{"binary"}\NormalTok{,}
+  \AttributeTok{subset =} \StringTok{"training"}\NormalTok{,}
+  \AttributeTok{classes =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}female\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}male\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\#image\_Dataset\_From\_directory: labels na ordem}
+
+\NormalTok{validation\_generator }\OtherTok{\textless{}{-}} \FunctionTok{flow\_images\_from\_directory}\NormalTok{(}
+\NormalTok{  train\_dir,}
+  \AttributeTok{generator =}\NormalTok{ datagen,}
+  \AttributeTok{target\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{96}\NormalTok{, }\DecValTok{103}\NormalTok{),}
+  \AttributeTok{color\_mode =} \StringTok{"grayscale"}\NormalTok{,}
+  \AttributeTok{batch\_size =} \DecValTok{32}\NormalTok{,}
+  \AttributeTok{class\_mode =} \StringTok{"binary"}\NormalTok{,}
+  \AttributeTok{subset =} \StringTok{"validation"}\NormalTok{,}
+  \AttributeTok{classes =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}female\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}male\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+As etapas 5 e 6 foram definidas considerando a arquitetura de rede
+sugerida pelo ChatGPT, com alterações. A arquitetura sugerida é composta
+por três camadas convolucionais, que seguem o exemplo dado em aula. A
+quantidade de filtros aumenta na medida em que a imagem vai sendo
+reduzida a subprodutos de dimensões menores e é seguida de uma camada
+densa com 512 neurônios. Enquanto todas as ativações são ReLU, assumindo
+valores zero ou positivos, a última camada de ativação é uma sigmóide,
+que faz sentido com a classificação binária.
+
+Considerando as aulas, decidimos incluir duas camadas \emph{fully
+connected} ao final, cada uma com 256 neurônios, com drop-out rate de
+0.5. A camada de saída com um neurônio parece adequada com a atividade
+proposta de classificação.
+
+Não foram feitas alterações na compilação do modelo.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{keras\_model\_sequential}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_conv\_2d}\NormalTok{(}\AttributeTok{filters =} \DecValTok{32}\NormalTok{, }\AttributeTok{kernel\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{activation =} \StringTok{"relu"}\NormalTok{, }\AttributeTok{input\_shape =} \FunctionTok{c}\NormalTok{(}\DecValTok{96}\NormalTok{, }\DecValTok{103}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_max\_pooling\_2d}\NormalTok{(}\AttributeTok{pool\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_conv\_2d}\NormalTok{(}\AttributeTok{filters =} \DecValTok{64}\NormalTok{, }\AttributeTok{kernel\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{activation =} \StringTok{"relu"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_max\_pooling\_2d}\NormalTok{(}\AttributeTok{pool\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_conv\_2d}\NormalTok{(}\AttributeTok{filters =} \DecValTok{128}\NormalTok{, }\AttributeTok{kernel\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{activation =} \StringTok{"relu"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_max\_pooling\_2d}\NormalTok{(}\AttributeTok{pool\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_flatten}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_dense}\NormalTok{(}\AttributeTok{units =} \DecValTok{256}\NormalTok{, }\AttributeTok{activation =} \StringTok{"relu"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_dropout}\NormalTok{(}\AttributeTok{rate =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_dense}\NormalTok{(}\AttributeTok{units =} \DecValTok{256}\NormalTok{, }\AttributeTok{activation =} \StringTok{"relu"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_dropout}\NormalTok{(}\AttributeTok{rate =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{layer\_dense}\NormalTok{(}\AttributeTok{units =} \DecValTok{1}\NormalTok{, }\AttributeTok{activation =} \StringTok{"sigmoid"}\NormalTok{)}
+
+\CommentTok{\# Compile the model}
+\NormalTok{model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{compile}\NormalTok{(}
+  \AttributeTok{loss =} \StringTok{"binary\_crossentropy"}\NormalTok{,}
+  \AttributeTok{optimizer =} \FunctionTok{optimizer\_rmsprop}\NormalTok{(}\AttributeTok{lr =} \FloatTok{0.0001}\NormalTok{),}
+  \AttributeTok{metrics =} \FunctionTok{c}\NormalTok{(}\StringTok{"accuracy"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Considerando ainda as aulas sobre otimização e sugestões de listas
+anteriores, optamos por incluir \emph{early stopping} para evitar
+\emph{overfitting} e possivelmente reduzir tempo computacional
+infrutífero. O \emph{early stopping} é definido em função dos resultados
+da função de perda e o treinamento será interrompido se não houver
+melhora em 10 épocas. Em seguida, o modelo será salvo em
+\texttt{best\_model.h5} e apenas o melhor modelo será salvo.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{early\_stopping }\OtherTok{\textless{}{-}} \FunctionTok{callback\_early\_stopping}\NormalTok{(}
+  \AttributeTok{monitor =} \StringTok{"val\_loss"}\NormalTok{,}
+  \AttributeTok{patience =} \DecValTok{10}\NormalTok{,}
+  \AttributeTok{restore\_best\_weights =} \ConstantTok{TRUE}
+\NormalTok{)}
+
+\NormalTok{model\_checkpoint }\OtherTok{\textless{}{-}} \FunctionTok{callback\_model\_checkpoint}\NormalTok{(}
+  \AttributeTok{filepath =} \StringTok{"best\_model.h5"}\NormalTok{,}
+  \AttributeTok{monitor =} \StringTok{"val\_accuracy"}\NormalTok{,}
+  \AttributeTok{save\_best\_only =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Por fim, o modelo é treinado, utilizando como argumentos todas as
+especificações dadas anteriormente. Os pesos das classes são definidos
+em \texttt{class\_weights} para lidar com o desbalanceamento de classes
+da amostra.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{class\_weights }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{\textquotesingle{}0\textquotesingle{}} \OtherTok{=} \DecValTok{3260} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{3260} \SpecialCharTok{+} \DecValTok{740}\NormalTok{), }\StringTok{\textquotesingle{}1\textquotesingle{}} \OtherTok{=} \DecValTok{740} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{3260} \SpecialCharTok{+} \DecValTok{740}\NormalTok{))}
+
+\NormalTok{history }\OtherTok{\textless{}{-}}\NormalTok{ model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fit}\NormalTok{(}
+\NormalTok{  train\_generator,}
+  \AttributeTok{steps\_per\_epoch =} \FunctionTok{ceiling}\NormalTok{(train\_generator}\SpecialCharTok{$}\NormalTok{n }\SpecialCharTok{/}\NormalTok{ train\_generator}\SpecialCharTok{$}\NormalTok{batch\_size),}
+  \AttributeTok{epochs =} \DecValTok{50}\NormalTok{,}
+  \AttributeTok{validation\_data =}\NormalTok{ validation\_generator,}
+  \AttributeTok{validation\_steps =} \FunctionTok{ceiling}\NormalTok{(validation\_generator}\SpecialCharTok{$}\NormalTok{n }\SpecialCharTok{/}\NormalTok{ validation\_generator}\SpecialCharTok{$}\NormalTok{batch\_size),}
+  \AttributeTok{callbacks =} \FunctionTok{list}\NormalTok{(early\_stopping, model\_checkpoint),}
+  \AttributeTok{class\_weight =}\NormalTok{ class\_weights}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+\section{Classificação dos dados de
+teste}\label{classificauxe7uxe3o-dos-dados-de-teste}
+
+A classificação dos dados de teste foi feita com o melhor modelo gerado
+(conforme definições de \emph{callback}). Além disso, foi necessário
+indicar que não há label para esses dados, assim como indicar que as
+imagens estão em escala de cinza e com as mesmas dimensões das imagens
+de treino.
+
+Outro hiperparâmetro que foi ajustado manualmente foi o limiar de
+classificação. O limiar que parecia apresentar resultados mais
+condizentes com a amostra de treinamento era de 0.7, visto que o
+primeiro quartil das probabilidades geradas como resultado era de
+aproximadamente 0.69.
+
+O resultado de \texttt{summary(predictions)} gerava a seguintes medidas
+de posição:
+
+\begin{quote}
+Min. :0.4378\\
+1st Qu.:0.6937\\
+Median :0.7370\\
+Mean :0.7263\\
+3rd Qu.:0.7752\\
+Max. :0.8715
+\end{quote}
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{best\_model }\OtherTok{\textless{}{-}} \FunctionTok{load\_model\_hdf5}\NormalTok{(}\StringTok{"best\_model.h5"}\NormalTok{)}
+
+\NormalTok{test\_images }\OtherTok{\textless{}{-}} \FunctionTok{image\_dataset\_from\_directory}\NormalTok{(}\StringTok{"/content/Teste"}\NormalTok{,}
+                                            \AttributeTok{label\_mode =} \ConstantTok{NULL}\NormalTok{,}
+                                            \AttributeTok{color\_mode =} \StringTok{"grayscale"}\NormalTok{,}
+                                            \AttributeTok{image\_size =} \FunctionTok{c}\NormalTok{(}\DecValTok{96}\NormalTok{, }\DecValTok{103}\NormalTok{))}
+
+\NormalTok{predictions }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(best\_model, test\_images)}
+
+\CommentTok{\# Interpret the predictions}
+\NormalTok{predicted\_labels }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(predictions }\SpecialCharTok{\textgreater{}} \FloatTok{0.7}\NormalTok{, }\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Finalmente, os resultados foram salvos em um arquivo \texttt{csv} com o
+nome e classificação correspondente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get the filenames}
+\NormalTok{test\_image\_filenames }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{"/content/Teste"}\NormalTok{, }\AttributeTok{recursive =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{test\_image\_filenames }\OtherTok{\textless{}{-}} \FunctionTok{basename}\NormalTok{(test\_image\_filenames)}
+
+\CommentTok{\# Create a data frame with filenames and predicted labels}
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Filename =}\NormalTok{ test\_image\_filenames,}
+  \AttributeTok{PredictedLabel =}\NormalTok{ predicted\_labels}
+\NormalTok{)}
+
+\CommentTok{\# Export results to CSV}
+\FunctionTok{write\_csv}\NormalTok{(results, }\StringTok{"predictions\_no\_rescale.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+
+\end{document}
